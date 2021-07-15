@@ -4,8 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.project.jobtest.vo.memberVO" alias="member"/>
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="mapper/MemberMapper.xml"/>
 	</mappers>
 </configuration>
