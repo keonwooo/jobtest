@@ -78,5 +78,31 @@
 			where
 				member_id = #{member_id}
 	</update>
+	
+	<update id="MemberUpdate" parameterType="member">
+		update
+			member
+		set
+			member_pw = #{member_pw}
+			,member_phone = #{member_phone}
+			,member_name = #{member_name}
+			,member_nickname = #{member_nickname}
+		where
+			member_id = #{member_id}
+	</update>
+	
+	<select id="MemberSelectOneAll" parameterType="string" resultType="hashmap">
+		select
+			member_id
+			,member_pw
+			,member_name
+			,member_phone
+			,member_nickname
+			,member_indate
+		from
+			member
+		where
+			member_id = #{member_id}
+	</select>
 
 </mapper>

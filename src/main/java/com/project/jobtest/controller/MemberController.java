@@ -121,4 +121,25 @@ public class MemberController {
 		return "redirect:/member/MemberLoginPage";
 	}
 	
+	@RequestMapping(value = "/MemberUpdate", method = RequestMethod.POST)
+	public String MemberUpdate(memberVO member) {
+		service.MemberUpdate(member);
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/MyPage", method = RequestMethod.GET)
+	public String MyPage(HttpSession session, Model model) {
+		System.out.println("여기는 컨트롤러");
+		String member_id = (String)session.getAttribute("LoginID");
+		String member_nickname = (String)session.getAttribute("LoginNickName");
+		HashMap<String, String> hash = new HashMap<String, String>();
+		
+		hash = service.MemberSelectOneAll(member_id);
+		model.addAttribute("hash", hash);
+		model.addAttribute("LoginNickName", member_nickname);
+		System.out.println("받아옴?");
+		
+		return "member/MyPage"; 
+	}
+	
 }

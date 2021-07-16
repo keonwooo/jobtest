@@ -1,6 +1,8 @@
 package com.project.jobtest.service;
 
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +76,17 @@ public class MemberService {
 
 	public void PwChange(memberVO member) {
 		dao.PwChange(member);
+	}
+
+	public void MemberUpdate(memberVO member) {
+		dao.MemberUpdate(member);
+	}
+
+	public HashMap<String, String> MemberSelectOneAll(String member_id) {
+		HashMap<String, String> hash = new HashMap<String, String>();
+		System.out.println("여기는 서비스");
+		hash = dao.MemberSelectOneAll(member_id);
+		return hash;
 	}
 	
 }

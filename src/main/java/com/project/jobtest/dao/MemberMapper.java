@@ -1,5 +1,7 @@
 package com.project.jobtest.dao;
 
+import java.util.HashMap;
+
 import com.project.jobtest.vo.memberVO;
 
 public interface MemberMapper {
@@ -17,5 +19,9 @@ public interface MemberMapper {
 	public String PwFind(memberVO member);
 
 	public void PwChange(memberVO member);
+
+	public void MemberUpdate(memberVO member);
+
+	public HashMap<String, String> MemberSelectOneAll(String member_id);
 
 }

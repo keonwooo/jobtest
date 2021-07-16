@@ -1,5 +1,7 @@
 package com.project.jobtest.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -89,6 +91,27 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void MemberUpdate(memberVO member) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		try {
+			mapper.MemberUpdate(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public HashMap<String, String> MemberSelectOneAll(String member_id) {
+		System.out.println("여기는 다오");
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		HashMap<String, String> hash = new HashMap<String, String>();
+		try {
+			hash = mapper.MemberSelectOneAll(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return hash;
 	}
 
 	
