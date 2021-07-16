@@ -49,5 +49,34 @@
 		where
 			member_id = #{member_id}
 	</select>
+	
+	<select id="MemberFind" parameterType="member" resultType="string">
+		select
+			member_id
+		from
+			member
+		where
+			member_name = #{member_name}
+			and member_phone = #{member_phone}
+	</select>
+	
+	<select id="PwFind" parameterType="member" resultType="string">
+		select
+			member_id
+		from
+			member
+		where
+			member_id = #{member_id}
+			and member_phone = #{member_phone}
+	</select>
+	
+	<update id="PwChange" parameterType="member">
+		update
+				member
+			set
+				member_pw = #{member_pw}
+			where
+				member_id = #{member_id}
+	</update>
 
 </mapper>

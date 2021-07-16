@@ -9,10 +9,10 @@
 	
 	<script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js"></script>	
 	<script type="text/javascript">
-		
+	
 		//회원가입 취소
 		function join_cancel(){
-	    	location.href = "/member/memberLoginPage";
+	    	location.href = "/member/MemberLoginPage";
 	    } 
 		
 		//회원가입

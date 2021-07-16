@@ -61,5 +61,19 @@ public class MemberService {
 		}
 		return false;
 	}
+
+	public String MemberFind(memberVO member) {
+		String member_id = dao.MemberFind(member);
+		return member_id;
+	}
+
+	public String PwFind(memberVO member) {
+		String member_id = dao.PwFind(member);
+		return member_id;
+	}
+
+	public void PwChange(memberVO member) {
+		dao.PwChange(member);
+	}
 	
 }

@@ -1,6 +1,7 @@
 package com.project.jobtest.controller;
 
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,6 +79,46 @@ public class MemberController {
 	public String MemberLogin(memberVO member, Model model, HttpSession session) {
 		String page = service.MemberLogin(member);
 		return page;
+	}
+	
+	@RequestMapping(value = "/Logout", method = { RequestMethod.GET, RequestMethod.POST})
+	public String MemberLogout(HttpSession session) throws IOException{
+		System.out.println("logout");
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/MemberFindForm", method = RequestMethod.GET)
+	public String MemberFindForm() {
+		return "member/MemberFindForm";
+	}
+	
+	@RequestMapping(value = "/MemberFind", method = RequestMethod.POST)
+	public String MemberFind(memberVO member, Model model) {
+		String member_id = service.MemberFind(member);
+		model.addAttribute("member_id", member_id);
+		return "member/FindResult";
+	}
+	
+	@RequestMapping(value = "/PwFindForm", method = RequestMethod.GET)
+	public String PwFindForm() {
+		return "member/PwFindForm";
+	}
+	
+	@RequestMapping(value = "/PwFind", method = RequestMethod.POST)
+	public String PwFind(memberVO member, Model model) {
+		String member_id = service.PwFind(member);
+		if(member_id!=null) {
+			model.addAttribute("member_id", member_id);
+		}
+		return "member/PwFindResult";
+	}
+	
+	@RequestMapping(value = "/PwChange", method = RequestMethod.POST)
+	public String PwChange(memberVO member) {
+		System.out.println("컨트롤러 : " + member);
+		service.PwChange(member);
+		return "redirect:/member/MemberLoginPage";
 	}
 	
 }

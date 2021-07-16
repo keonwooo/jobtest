@@ -60,6 +60,37 @@ public class MemberDAO {
 		return cnt;
 	}
 
+	public String MemberFind(memberVO member) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		String member_id = "";
+		try {
+			member_id = mapper.MemberFind(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return member_id;
+	}
+
+	public String PwFind(memberVO member) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		String str = "";
+		try {
+			str = mapper.PwFind(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return str;
+	}
+
+	public void PwChange(memberVO member) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		try {
+			mapper.PwChange(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	
 
 }

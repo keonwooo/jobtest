@@ -6,6 +6,14 @@
 	<title>Home</title>
 </head>
 <body>
-	<a href="/member/MemberLoginPage">로그인</a>
+	<c:choose>
+		<c:when test="${sessionScope.LoginID != null }">
+			<li>'${sessionScope.LoginNickName }'님</li>
+			<li><a href="member/Logout">로그아웃</a></li>
+		</c:when>
+		<c:otherwise>
+			<a href="member/MemberLoginPage">로그인</a>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>

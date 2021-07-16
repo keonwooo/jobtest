@@ -12,4 +12,10 @@ public interface MemberMapper {
 
 	public int MemberSelectOneNickname(String member_nickname);
 
+	public String MemberFind(memberVO member);
+
+	public String PwFind(memberVO member);
+
+	public void PwChange(memberVO member);
+
 }
