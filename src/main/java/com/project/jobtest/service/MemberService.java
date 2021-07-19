@@ -33,6 +33,8 @@ public class MemberService {
 
 	public String MemberJoin(memberVO member) {
 		dao.MemeberJoin(member);
+		
+		System.out.println("JoinOk");
 		return "redirect:/";
 	}
 
