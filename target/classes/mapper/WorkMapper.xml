@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.jobtest.dao.WorkMapper">
+	<!-- Create -->
+	<insert id="insertWorkList" parameterType="work">
+		insert into
+			work(
+				work_seq
+				,work_title
+				,work_system
+				,work_board
+				,work_price
+				,work_indate
+			)values(
+				SEQ_ID.nextval
+				,#{work_title}
+				,#{work_system}
+				,#{work_board}
+				,#{work_price}
+				,SYSDATE
+			)
+	</insert>
+	
+	<!-- Read -->
+	<select id="selectAllList" resultType="work">
+		select
+			work_seq
+			,work_title
+			,work_system
+			,work_board
+			,work_price
+			,work_indate
+		from
+			work
+		order by
+			work_seq
+		DESC
+	</select>
+	
+	<select id="selectOneList" resultType="work">
+		select
+            work_seq
+			,work_title
+			,work_system
+			,work_board
+			,work_price
+		from
+			work
+		where
+			work_seq = #{work_seq}
+	</select>
+	
+	<!-- Update -->
+	<update id="upDateList" parameterType="work">
+		update
+			work
+		set
+			work_title = #{work_title}
+			,work_system = #{work_system}
+			,work_board = #{work_board}
+			,work_price = #{work_price}
+		where 
+			work_seq = #{work_seq} 
+	</update>
+	
+	<!-- Delete -->
+	<delete id="deleteList" parameterType="work">
+		delete from
+			work
+		where
+			work_seq = #{work_seq}
+	</delete>
+</mapper>
