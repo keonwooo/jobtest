@@ -3,12 +3,13 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>Home</title>
+	<title>JOB</title>
 </head>
 <body>
 	<c:choose>
 		<c:when test="${sessionScope.LoginID != null }">
 			<li>'${sessionScope.LoginNickName }'님</li>
+			<li><a href="/chat">채팅방</a></li>
 			<li><a href="member/MyPage">마이페이지</a></li>
 			<li><a href="member/Logout">로그아웃</a></li>
 		</c:when>
