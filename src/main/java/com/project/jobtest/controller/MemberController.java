@@ -117,7 +117,7 @@ public class MemberController {
 	public String PwChange(memberVO member) {
 		System.out.println("컨트롤러 : " + member);
 		service.PwChange(member);
-		return "redirect:/member/MemberLoginPage";
+		return "redirect:/MemberLoginPage";
 	}
 	
 	@RequestMapping(value = "/MemberUpdate", method = RequestMethod.POST)
