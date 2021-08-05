@@ -17,6 +17,9 @@
 	
 		<link href="/resources/css/app.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=7jc6l2xe2a&submodules=geocode"></script>
+   	 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
 	</head>
 	
 	<body>
@@ -302,8 +305,7 @@
 				</nav>
 	
 				<main class="content">
-					<div>
-					</div>
+					<div id="map" style="width:100%; height: 100%"></div>
 				</main>
 	
 				<footer class="footer">
@@ -558,6 +560,16 @@
 					defaultDate: defaultDate
 				});
 			});
+		</script>
+		<script type="text/javascript">
+		/* 지도 생성 띄우기*/
+		var mapOptions = {
+		    center: new naver.maps.LatLng(37.520659, 126.982254),
+		    zoom: 14
+		}
+
+		var map = new naver.maps.Map('map',mapOptions);
+		/* 지도 생성 끝 */
 		</script>
 	
 	</body>
