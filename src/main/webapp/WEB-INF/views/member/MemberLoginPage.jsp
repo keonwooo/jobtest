@@ -51,7 +51,7 @@
 			   , dataType : "text"
 	           , success : function(data) { 
 	               				if (data == 'F') { 
-	                       			flag = false; 
+	                       			flag = true; 
 	                       		} 
 	               			}
 			   , error : function(error) {
