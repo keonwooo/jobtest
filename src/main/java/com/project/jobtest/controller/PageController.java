@@ -9,11 +9,16 @@ public class PageController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		return "home";
+		return "index";
 	}
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.GET)
 	public String chat() {
 		return "chat";
+	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index() {
+		return "index";
 	}
 }
