@@ -27,4 +27,18 @@ create table chatroom(
 	,CLASS_class_id				number			not null
 );
 
+create table work(
+    work_seq                number          primary key
+    ,work_title             varchar2(50)    not null
+    ,work_system            varchar2(50)    not null
+    ,work_board			    varchar2(1000)  not null
+    ,work_price			    number          not null
+    ,work_lat               number          null
+    ,work_lang              number          null
+    ,work_indate			date          default SYSDATE
+);
+
+CREATE SEQUENCE SEQ_ID INCREMENT BY 1 START WITH 1;
+
 commit;
+
