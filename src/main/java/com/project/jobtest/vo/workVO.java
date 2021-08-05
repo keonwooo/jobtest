@@ -11,5 +11,7 @@ public class workVO {
 	private String work_system;
 	private String work_board;
 	private String work_price;
+	private Double work_lat;
+	private Double work_lang;
 	private Date work_indate;
 }

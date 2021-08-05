@@ -7,77 +7,108 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>간단한 지도 표시하기</title>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=7jc6l2xe2a"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=7jc6l2xe2a&submodules=geocode"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
 </head>
 <body>
 <div id="wrap" class="wrap">
 <header>
+<script type="text/javascript">
+$(function(){
+	$(".infowindow_wrap").click(function(){
+	      alert("infowindow_wrap id 클릭");
+	  });
+  $('.infowindow_wrap').click(function(){
+    $('.infoDetail').show();
+  });
+  $('.infowindow_wrap').click(function(){
+    $('.infoDetail').hide();
+  });
+});
+</script>
 <div id="navbar">
-	<a href="/">home</a>
+	<a href="/">home </a>
 	<a href="/member/MemberLoginPage">로그인</a>
 	<a href="/work/Page">work</a>
 </div>
 </header>
-<!-- <div id="infoBox">
-	<div id="infoTitle">헬로</div>
-	<div id="infoContent">월드</div>
-</div> -->
-<div id="current">현재 위치</div>
+<!-- <div id="current">현재 위치</div> -->
+<div id="detail">
+
+</div>
 <div id="map" style="width:100%;height:100vh;"></div>
 </div>
+
+<div class="infoDetail">
+hello
+</div>
+<script type="text/javascript" src="/resources/data/data.js"></script>
 <script>
-/* 지도 생성 */
+/* 지도 생성 띄우기*/
 var mapOptions = {
-		center: new naver.maps.LatLng(37.520659, 126.982254),
-		zoom: 14
+    center: new naver.maps.LatLng(37.520659, 126.982254),
+    zoom: 14
 }
+
 var map = new naver.maps.Map('map',mapOptions);
+/* 지도 생성 끝 */
 
-/* 마커생성 */
-var marker = new naver.maps.Marker({
-    position: new naver.maps.LatLng(37.520659, 126.982254),
-    map: map
-});
+/* 정해진 위치별 마커 및 정보 창 */
+var markerList = []; //마커를 담는 변수와 정보창을 담는 변수생성
+var infowindowList = [];
 
-/* 인포박스 마커 위에 생성 */
-var content = `<div class="infowindow_wrap">
-	<div class="infowindow_title">기모찌한 심부름</div>
-	<div class="infowindow_content">기모찌한 심부름 내용</div>
-	<div class="infowindow_date">기모찌한 심부름 생성 날짜</div>
-</div>`
+for (var i in data){ //
+    var target = data[i];
+    var latlng = new naver.maps.LatLng(target.lat, target.lng);
+    marker = new naver.maps.Marker({
+        map: map,
+        position: latlng
+    });
 
-var infowindow = new naver.maps.InfoWindow({
-content: content,
-});
+    var content = `<div class='infowindow_wrap'>
+            <div class='infowindow_seq'>${workVO.work_seq}</div>
+            <div class='infowindow_title'>${workVO.work_title}</div>
+            <div class='infowindow_content'>${workVO.work_board}</div>
+            <div class='infowindow_date'>${workVO.work_indate}</div>
+        </div>`
+        
 
-naver.maps.Event.addListener(marker, "click", function(e) {
-if (infowindow.getMap()) {
-    infowindow.close();
-} else {
-    infowindow.open(map, marker);
-}
-});
-
-/* 현재 위치 마커생성및 줌 댕기기 */
-$('#current').click(()=>{
-	if('geolocation' in navigator){
-		navigator.geolocation.getCurrentPosition(function(position){
-			const lat = position.coords.latitude;
-			const lng = position.coords.longitude;
-			const latlng = new naver.maps.LatLng(lat,lng);
-			marker = new naver.maps.Marker({
-				map: map,
-				position: latlng,
-			});
-			map.setZoom(14,false);
-			map.panTo(latlng);
-		});
-	}else{
-		alert("위치정보 사용 불가")
+	var infowindow = new naver.maps.InfoWindow({
+	    content: content,
+	    });
+	
+	    markerList.push(marker);
+	    infowindowList.push(infowindow);
 	}
-})
+	
+for (var i=0, ii=markerList.length; i<ii;i++){
+    naver.maps.Event.addListener(map, "click", ClickMap(i));
+    naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
+}
+
+function ClickMap(i) {
+    return function () {
+        var infowindow = infowindowList[i];
+        infowindow.close();
+    }
+}
+
+function getClickHandler(i){
+    return function(){
+        var marker = markerList[i];
+        var infowindow = infowindowList[i];
+        if(infowindow.getMap()){
+            infowindow.close();
+        } else {
+            infowindow.open(map, marker);
+        }
+   }
+    
+   
+	
+}  
+/* 정해진 위치별 마커 및 정보 창 끝 */
 
 </script>
 </body>

@@ -33,8 +33,10 @@ public class WorkController {
 
 //	임시 지도 페이지 게시판 기능 만들어지면 합치기
 	@RequestMapping(value = "/Map", method = RequestMethod.GET)
-	public String Workmap() {
+	public String Workmap(@RequestParam("work_seq")int work_seq,Model model) {
 
+		model.addAttribute(ws.selectOneList(work_seq));
+		
 		return "/work/map";
 	}
 
@@ -71,6 +73,7 @@ public class WorkController {
 
 
 //	UpDate
+	// 수정 게시판 읽어오기
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String updateListGET(int work_seq,Model model) {
 
@@ -78,6 +81,7 @@ public class WorkController {
 		return "/work/modify";
 	}
 	
+	// DB 값 수정
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String updateListPOST(workVO work, Model model) {
 

@@ -44,6 +44,7 @@
 			,work_system
 			,work_board
 			,work_price
+			,work_indate
 		from
 			work
 		where
