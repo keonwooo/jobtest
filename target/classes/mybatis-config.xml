@@ -5,12 +5,20 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.project.jobtest.vo.memberVO" alias="member"/>
+<<<<<<< HEAD
 		<typeAlias type="com.project.jobtest.vo.ChatRoomVO" alias="room"/>
 		<typeAlias type="com.project.jobtest.vo.messageVO" alias="message"/>
+=======
+		<typeAlias type="com.project.jobtest.vo.workVO" alias="work"/>
+>>>>>>> origin/master
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
+<<<<<<< HEAD
 		<mapper resource="mapper/ChatMapper.xml"/>
+=======
+		<mapper resource="mapper/WorkMapper.xml"/>
+>>>>>>> origin/master
 	</mappers>
 </configuration>
