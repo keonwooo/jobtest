@@ -7,4 +7,24 @@ create table member(
     ,member_indate          date            default sysdate
 );
 
+create table message(
+	message_id				number			primary key
+	,message_sender			varchar2(50)	not null
+	,message_receiver		varchar2(20)	not null
+	,message_content		varchar2(4000)	not null
+	,message_sendTime		date			
+	,CHATROOM_chatroom_id	number			not null
+	,message_readTime		date			
+	,MEMBER_member_id		varchar2(50)	not null
+	,TUTOR_MEMBER_member_id	varchar2(50)
+	,CLASS_class_id			number			not null
+);
+
+create table chatroom(
+	chatroom_id				number			primary key
+	,MEMBER_member_id		varchar2(50)	not null
+	,TUTOR_MEMBER_member_id	varchar2(50)	not null
+	,CLASS_class_id				number			not null
+);
+
 commit;

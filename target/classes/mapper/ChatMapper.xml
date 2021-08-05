@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.jobtest.dao.ChatMapper">
+
+	<insert id = "createRoom" parameterType="room">
+		insert into 
+			chatroom (
+				MEMBER_member_id
+				,TUTOR_MEMBER_member_id
+				,CLASS_class_id
+			)values(
+				#{MEMBER_member_id}
+				,#{TUTOR_MEMBER_member_id}
+				,#{CLASS_class_id}		
+			)
+	</insert> 
+	
+	<select id="isRoom" resultType="room" parameterType="room">
+		select 
+			chatroom_id
+			,MEMBER_member_id
+			,TUTOR_MEMBER_member_id
+			,CLASS_class_id	
+		from
+			chatroom
+		where
+			MEMBER_member_id = #{MEMBER_member_id}
+			and TUTOR_MEMBER_member_id = #{TUTOR_MEMBER_member_id}
+			and CLASS_class_id = #{CLASS_class_id}
+	</select>
+	
+	<insert id="insertMessage" parameterType="message">
+		insert into
+			message (
+				message_sender
+				,message_receiver
+				,message_content
+				,CHATROOM_chatroom_id
+				,MEMBER_member_id
+				,TUTOR_MEMBER_member_id
+				,CLASS_class_id
+			)values(
+				#{message_sender}
+				,#{message_receiver}
+				,#{message_content}
+				,#{CHATROOM_chatroom_id}
+				,#{MEMBER_member_id}
+				,#{TUTOR_MEMBER_member_id}
+				,#{CLASS_class_id}
+			)
+	</insert>
+	
+	<select id="getPartner" resultType="String" parameterType="room">
+		select
+			MEMBER_member_id
+		from
+			message
+		where
+			TUTOR_MEMBER_member_id = #{TUTOR_MEMBER_member_id}
+			and CLASS_class_id = #{CLASS_class_id}	
+	</select>
+
+	<select id="getName" resultType="String" parameterType="String">
+		select
+			member_name
+		from
+			member
+		where
+			member_id = #{member_id}
+	</select>
+	
+	<select id="getMessageList" resultType="message" >
+	
+	
+	</select>
+</mapper>

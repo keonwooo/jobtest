@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-16LE">
 	<title>JOB</title>
+	<script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
 		
 		function loginCheck() {
@@ -34,6 +35,31 @@
 			}
 	    	
 	    	return true;
+		}
+		
+		function jquryCheck(){
+			var flag = true;
+			
+			$.ajax({ 
+	            type : 'POST'
+	           , url : '/member/Login_Ck'
+	           , data : {
+	        	   			id:$('#member_id').val() 
+	        	   			,pw:$('#member_pw').val()	
+						}
+			   , async: false
+			   , dataType : "text"
+	           , success : function(data) { 
+	               				if (data == 'F') { 
+	                       			flag = false; 
+	                       		} 
+	               			}
+			   , error : function(error) {
+				   			console.log("통신 실패");
+				   		} 
+		 	}); 
+
+			return flag;
 		}
 	
 	</script>

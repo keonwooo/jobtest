@@ -5,9 +5,12 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.project.jobtest.vo.memberVO" alias="member"/>
+		<typeAlias type="com.project.jobtest.vo.ChatRoomVO" alias="room"/>
+		<typeAlias type="com.project.jobtest.vo.messageVO" alias="message"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
+		<mapper resource="mapper/ChatMapper.xml"/>
 	</mappers>
 </configuration>
