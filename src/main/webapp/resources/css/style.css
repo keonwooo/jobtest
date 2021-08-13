@@ -89,3 +89,13 @@ a, link, visited{
 	border-radius: 4px;
 	text-align: center;
 }
+
+.showDetail {
+	direction: ltr;
+    max-width: 633px;
+    min-width: 633px;
+}
+
+.collapsed-1 {
+	margin-right: -633px;
+}

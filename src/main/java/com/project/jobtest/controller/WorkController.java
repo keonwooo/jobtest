@@ -32,14 +32,14 @@ public class WorkController {
 	}
 
 //	임시 지도 페이지 게시판 기능 만들어지면 합치기
-	@RequestMapping(value = "/Map", method = RequestMethod.GET)
-	public String Workmap(@RequestParam("work_seq")int work_seq,Model model) {
-
-		model.addAttribute(ws.selectOneList(work_seq));
-		
-		return "/work/map";
-	}
-
+	/*
+	 * @RequestMapping(value = "/map", method = RequestMethod.GET) public String
+	 * Workmap(@RequestParam("work_seq")int work_seq,Model model) {
+	 * 
+	 * model.addAttribute(ws.selectOneList(work_seq));
+	 * 
+	 * return "/index"; }
+	 */
 
 
 //	Create
@@ -52,7 +52,7 @@ public class WorkController {
 	}
 	
 //	Read
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String selectAllList(Model model) {
 
 		ArrayList<workVO> list = ws.selectAllList();
@@ -60,7 +60,7 @@ public class WorkController {
 
 		model.addAttribute("list", list);
 
-		return "/work/list";
+		return "/index";
 	}
 	
 	@RequestMapping(value = "/detail")
@@ -68,7 +68,7 @@ public class WorkController {
 		
 		model.addAttribute(ws.selectOneList(work_seq));
 		
-		return "/work/detail";
+		return "redirect:/work/";
 	}
 
 

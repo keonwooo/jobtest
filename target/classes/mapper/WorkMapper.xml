@@ -29,6 +29,8 @@
 			,work_system
 			,work_board
 			,work_price
+			,work_lat
+			,work_lng
 			,work_indate
 		from
 			work
@@ -44,6 +46,8 @@
 			,work_system
 			,work_board
 			,work_price
+			,work_lat
+			,work_lng
 			,work_indate
 		from
 			work
