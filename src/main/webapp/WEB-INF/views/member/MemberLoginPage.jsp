@@ -342,18 +342,18 @@
 	                <i class="align-middle" data-feather="settings"></i>
 	              </a>
 	
-								<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 								<c:choose>
 									<c:when test="${sessionScope.LoginID != null }">
+									<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 										${sessionScope.LoginNickName }
+						            </a>
 									</c:when>
 									<c:otherwise>
-										<span class="text-dark"><a href="member/MemberLoginPage">로그인</a><br></span>
+										<span class="text-dark"><a href="/member/MemberLoginPage">Login</a><br></span>
 									</c:otherwise>
 								</c:choose>
 		
 	                			
-	              </a>
 								<div class="dropdown-menu dropdown-menu-end">
 									<a class="dropdown-item" href="member/MyPage"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 									<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
@@ -385,12 +385,15 @@
 										<div class="mb-3">
 											<label class="form-label">Email</label>
 											<input class="form-control form-control-lg" type="text" name="member_id" id="member_id" placeholder="Enter your email" />
+											<small>
+												<a href="/member/MemberFindForm">Forgot email?</a>
+											</small>
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Password</label>
 											<input class="form-control form-control-lg" type="password" name="member_pw" id="member_pw" placeholder="Enter your password" />
 											<small>
-								            <a href="index.html">Forgot password?</a>
+								            <a href="/member/PwFindForm">Forgot password?</a>
 								          </small>
 										</div>
 										<div>
@@ -402,6 +405,7 @@
 								          </label>
 										</div>
 										<div class="text-center mt-3">
+											<a href="/member/MemberJoinForm" style="font-weight:bold">Sign up</a>&nbsp&nbsp&nbsp&nbsp
 											<input type="submit" value="Sign in" class="btn btn-lg btn-primary">
 										</div>
 									</form>
@@ -409,9 +413,6 @@
 							</div>
 						</div>
 						<div class="btn_member">
-							&nbsp<a href="/member/MemberJoinForm" style="font-weight:bold">Sign up</a>&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
-							<a href="/member/MemberFindForm" style="font-weight:bold">Forgot ID</a>&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-							<a href="/member/PwFindForm" style="font-weight:bold">Forgot PW</a>
 						</div>
 
 					</div>

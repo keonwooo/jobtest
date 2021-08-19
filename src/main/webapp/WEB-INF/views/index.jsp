@@ -275,18 +275,18 @@
 	                <i class="align-middle" data-feather="settings"></i>
 	              </a>
 	
-								<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 								<c:choose>
-									<c:when test="${sessionScope.LoginID != null }">
+										<c:when test="${sessionScope.LoginID != null }">
+									<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 										${sessionScope.LoginNickName }
+					             	</a>
 									</c:when>
 									<c:otherwise>
-										<span class="text-dark"><a href="member/MemberLoginPage">로그인</a><br></span>
+										<span class="text-dark"><a href="/member/MemberLoginPage">Login</a><br></span>
 									</c:otherwise>
 								</c:choose>
 		
 	                			
-	              </a>
 								<div class="dropdown-menu dropdown-menu-end">
 									<a class="dropdown-item" href="member/MyPage"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 									<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
