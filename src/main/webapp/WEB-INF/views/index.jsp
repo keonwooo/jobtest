@@ -447,9 +447,7 @@
 					infoWindow.open(map, marker);
 					
 					$('.clicktest').click(function(){
-						if(${target.seq} === ${list.work_seq}){
-							alert("ok");
-						}
+						
 						
 			        	e.classList.toggle('collapsed-1');
 			        });
