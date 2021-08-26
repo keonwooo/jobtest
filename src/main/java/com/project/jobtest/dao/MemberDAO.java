@@ -114,5 +114,14 @@ public class MemberDAO {
 		return hash;
 	}
 
+	public void MemberDelete(String member_id) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		try {
+			mapper.MemberDelete(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	
 }

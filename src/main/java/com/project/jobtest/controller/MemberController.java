@@ -128,6 +128,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value = "/MemberDelete", method = RequestMethod.GET)
+	public String MemberDelete(String member_id, HttpSession session) throws IOException{
+		System.out.println(member_id);
+		service.MemberDelete(member_id);
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 	@RequestMapping(value = "/MyPage", method = RequestMethod.GET)
 	public String MyPage(HttpSession session, Model model) {
 		System.out.println("여기는 컨트롤러");

@@ -21,11 +21,11 @@
 	<script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js"></script>	
 	<script type="text/javascript">
 		
-		var idJ = /^[a-z0-9]{4,12}$/;
-		var pwJ = /^[a-z0-9]{3,12}$/;
-		var phJ = /^[0-9]{11}$/;
-		var naJ = /^[a-z]{2,12}$/;
-		var niJ = /^[a-z0-9]{3,12}$/;
+		var idJ = /^[a-z0-9]{4,12}$/;	//아이디 정규식
+		var pwJ = /^[a-zA-Z0-9`~!@#$%^&*()-_=+\|{};:,.<>/?]{3,12}$/;	//비밀번호 정규식
+		var phJ = /^[0-9]{11}$/;		//핸드폰 정규식
+		var naJ = /^[a-z]{2,12}$/;		//이름 정규식
+		var niJ = /^[a-zA-Z0-9]{3,12}$/;	//닉네임 정규식
  
 	
 		//회원가입 취소
@@ -124,7 +124,7 @@
 					$('#PhoneCheck').css('color', 'red');
 					$("#join_submit").attr("disabled", true);				
 				} else {
-					$('#PhoneCheck').text("전화번호는 11자리를 입력해 주세요 :)");
+					$('#PhoneCheck').text("전화번호는 숫자로 11자리를 입력해 주세요 :)");
 					$('#PhoneCheck').css('color', 'red');
 					$("#join_submit").attr("disabled", true);
 				}
@@ -214,120 +214,6 @@
 			
 		});
 		
-		//회원가입
-		/* function join_submit(){
-			var member_id = document.getElementById("member_id").value;
-			var member_pw = document.getElementById("member_pw").value;
-			var member_pwck = document.getElementById("member_pwck").value;
-			var member_phone = document.getElementById("member_phone").value;
-			var member_name = document.getElementById("member_name").value;
-			var member_nickname = document.getElementById("member_nickname").value;
-
-			document.getElementById("user_id").value = member_id;
-			document.getElementById("user_pw").value = member_pw;
-			document.getElementById("user_phone").value = member_phone;
-			document.getElementById("user_name").value = member_name;
-			document.getElementById("user_nickname").value = member_nickname;
-			
-			if(member_pw==''||member_pw.length==0){
-				alert("비밀번호를 입력해 주세요");
-				return false;
-				}else if(member_pw.length<=2||member_pw.length>=11){
-					alert("비밀번호는 3~10글자 입니다");
-					return false;
-				}
-			
-			if(member_pw!=member_pwck){
-				alert("동일한 비밀번호를 입력해 주세요");
-				return false;
-				}
-			
-			if(member_phone==''||member_phone.length==0){
-				alert("전화번호를 입력해 주세요");
-				return false;
-				}
-
-			if(member_name==''||member_name.length==0){
-				alert("이름을 입력해 주세요");
-				return false;
-				}
-
-			if(member_nickname==''||member_nickname.length==0){
-				alert("닉네임을 입력해 주세요");
-				return false;
-				}else if(member_nickname.length<=2||member_nickname.length>=9){
-					alert("닉네임은 3~8글자 입니다");
-					return false;
-				}
-			
-			document.getElementById("joinForm").submit();
-			
-		} */
-		
-		//아이디 중복 검사
-		/* function CheckId(){
-			$.ajax({
-				url:"/member/CheckId",
-				data:{
-					member_id:$("#member_id").val()
-					},
-				success:function(data){
-					if(data==1){
-						$("#IdCheck").text("사용중인 아이디입니다");
-						$("#IdCheck").css("color","red");
-						$("#join_submit").attr("disabled", true);
-					}else{
-						if($("#member_id").val().length<=2||$("#member_id").val().length>=11){
-							$("#IdCheck").text("아이디는 3~11글자 입니다");
-							$("#IdCheck").css("color","red");
-							$("#join_submit").attr("disabled", true);
-						}else{
-							$("#IdCheck").text("사용가능한 아이디입니다");
-							$("#IdCheck").css("color","green");
-							$("#join_submit").attr("disabled", false);
-						}
-					}
-				},
-				error:function(e){
-					alert("통신 실패");
-					console.log(e);
-					}
-			});
-		} */
-		
-		//닉네임 중복 검사
-		/* function CheckNickname(){
-			$.ajax({
-				url:"/member/CheckNickname",
-				data:{
-					member_nickname:$("#member_nickname").val()
-					},
-				success:function(data){
-					if(data==1){
-						$("#NicknameCheck").text("사용중인 닉네임입니다");
-						$("#NicknameCheck").css("color","red");
-						$("#join_submit").attr("disabled", true);
-					}else{
-						if($("#member_nickname").val().length<=2||$("#member_nickname").val().length>=9){
-							$("#NicknameCheck").text("닉네임은 3~8글자 입니다");
-							$("#NicknameCheck").css("color","red");
-							$("#join_submit").attr("disabled", true);
-						}else{
-							$("#NicknameCheck").text("사용가능한 닉네임입니다");
-							$("#NicknameCheck").css("color","green");
-							$("#join_submit").attr("disabled", false);
-						}
-					}
-				},
-				error:function(e){
-					alert("통신 실패");
-					console.log(e);
-					}
-			});
-		} */
-	
-
-		
 	</script>
 	
 	<style type="text/css">
@@ -357,34 +243,31 @@
 						</li>
 	
 						<li class="sidebar-item active">
-							<a class="sidebar-link" href="index.html">
+							<a class="sidebar-link" href="/index.html">
 	              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-	            </a>
+	            </a>	
 						</li>
-	
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="pages-profile.html">
-	              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-	            </a>
-						</li>
-	
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="pages-sign-in.html">
-	              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
-	            </a>
-						</li>
-	
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="pages-sign-up.html">
-	              <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign Up</span>
-	            </a>
-						</li>
-	
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="pages-blank.html">
-	              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
-	            </a>
-						</li>
+						<c:choose>
+							<c:when test="${sessionScope.LoginID != null }">
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/member/MyPage">
+		              					<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+		            				</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/member/MemberLoginPage">
+						              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+						            </a>
+								</li>
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/member/MemberJoinForm">
+			              				<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign Up</span>
+			            			</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
 	
 						<li class="sidebar-header">
 							Tools & Components
@@ -605,13 +488,13 @@
 	                			
 	              </a>
 								<div class="dropdown-menu dropdown-menu-end">
-									<a class="dropdown-item" href="member/MyPage"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+									<a class="dropdown-item" href="/member/MyPage"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 									<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 									<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="member/Logout">Log out</a>
+									<a class="dropdown-item" href="/member/Logout">Log out</a>
 								</div>
 							</li>
 						</ul>
