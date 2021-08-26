@@ -468,16 +468,7 @@
 		    naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 		}
 		
-		// 장소 검색 객체를 생성합니다
-		var ps = new kakao.maps.services.Places(); 
-		
-		$("#search_input").on("keydown", function(e){
-			if(e.keyCode === 13){
-				var content = ${this}.val();
-				console.log(e.keyCode);
-				alert("clickevent:"+ e.keyCode);
-			}
-		});
+	
 		
 		
 		</script>

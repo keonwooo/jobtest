@@ -44,16 +44,7 @@ public class WorkController {
 	
 //	Read
 	// index
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String selectAllList(Model model) {
-		
-		ArrayList<workVO> list = ws.selectAllList();
-		
-		
-		model.addAttribute("list", list);
-		
-		return "/index";
-	}
+
 	
 	// 생성게시판
 	@RequestMapping(value = "/Write", method = RequestMethod.GET)
