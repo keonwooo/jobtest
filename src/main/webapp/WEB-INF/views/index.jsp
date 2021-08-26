@@ -306,26 +306,42 @@
 				</nav>
 	
 				<main class="content">
-					<div id="map" style="width:100%; height: 100%"></div>
-				
-			
-					<div class="showDetail collapsed-1">
-					
-					
-						<%--  <form >
-							<p><label>글번호</label> <input type="text" name ="work_seq" value ="${list.work_seq}" readonly="readonly"></p>
-							<p><label>제목</label> <input type="text" name ="work_title" value ="${list.work_title}" readonly="readonly"></p>
-							<p><label>유형</label> <input type="text" name="work_system" size="15" value = "${list.work_system}"readonly="readonly"><p>
-							<label>내용</label> <textarea name="work_board" rows ="10" cols="70" readonly="readonly">${list.work_board}</textarea><br>
-							<p><label>가격</label> <input type="text" name ="work_price" value ="${list.work_price}" readonly="readonly"></p> 
-							
-							<button type="submit" formaction="/work/modify" formmethod="get">수정</button>
-							<button type="submit" formaction="/work/delete" formmethod="post">삭제</button>
-							<button type="submit" formaction="/work/list" formmethod="get">목록</button>
-						
-						</form>  --%>
-					
+					<div id="search">
+						<input type="text" id="search_input" placeholder="목적지 입력"/>
+						<button id="search_button">검색</button>
 					</div>
+					<div id="map" style="width:100%; height: 100vh;"></div>
+					<ul class="showDetail collapsed-1">
+						<c:forEach items="${list }" var="list">
+							<li class="libox">
+								<div class="item">
+									<a href="/work/detail?work_seq=${list.work_seq }">
+										<div>
+											<span class="dli-1">${list.work_title }</span>
+										</div>
+											
+									</a>
+									<a href="#">
+										<div>
+											<span class="dli-2">${list.work_system }</span>
+										</div>
+									
+									</a>
+								</div>
+								<div>
+									<a href="#">
+									<img src="http://placehold.it/110X112" />
+									</a>
+									<a href="#">
+									<img src="http://placehold.it/110X112" />
+									</a>
+									<a href="#">
+									<img src="http://placehold.it/110X112" />
+									</a>
+								</div>
+							</li>
+						</c:forEach>
+					</ul>												
 				</main>
 	
 				<footer class="footer">
@@ -359,7 +375,8 @@
 			</div>
 		</div>
 	
-		<script src="/resources/js/app.js"></script>	
+		<script src="/resources/js/app.js"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8862ea6580612c11c1adaf233a163b08"></script>
 		<script type="text/javascript">
 		/* 지도 생성 띄우기*/
 		var mapOptions = {
@@ -369,6 +386,7 @@
 
 		var map = new naver.maps.Map('map',mapOptions);
 		/* 지도 생성 끝 */
+		 
 		
 	
 		// markerlist,infowindowlist
@@ -400,7 +418,7 @@
 			    position: latlng,
 			    map: map
 			});
-			
+			// OnClick="location.href='/work/detail?work_seq=`+ target.seq +`'
 			var content = 
 				`<div class="infowindow_wrap clicktest">
 				<div class="infowindow_seq">`+ target.seq +`</div>
@@ -419,6 +437,7 @@
 	        
 		}
 		
+		
 		function getClickHandler(i){
 			return function(){
 				var marker = markers[i],
@@ -431,17 +450,34 @@
 					infoWindow.open(map, marker);
 					
 					$('.clicktest').click(function(){
-			        	//alert("c");
+						if(${target.seq} === ${list.work_seq}){
+							alert("ok");
+						}
+						
 			        	e.classList.toggle('collapsed-1');
 			        });
 				}
 			}
 		}
 		
+		
+		
+		
 		//네이버 추가
 		for (var i=0, ii=markers.length; i<ii; i++) {
 		    naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 		}
+		
+		// 장소 검색 객체를 생성합니다
+		var ps = new kakao.maps.services.Places(); 
+		
+		$("#search_input").on("keydown", function(e){
+			if(e.keyCode === 13){
+				var content = ${this}.val();
+				console.log(e.keyCode);
+				alert("clickevent:"+ e.keyCode);
+			}
+		});
 		
 		
 		</script>
