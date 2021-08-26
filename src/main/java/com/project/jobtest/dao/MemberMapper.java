@@ -24,4 +24,6 @@ public interface MemberMapper {
 
 	public HashMap<String, String> MemberSelectOneAll(String member_id);
 
+	public void MemberDelete(String member_id);
+
 }

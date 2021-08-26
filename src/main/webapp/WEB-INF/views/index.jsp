@@ -40,34 +40,31 @@
 						</li>
 	
 						<li class="sidebar-item active">
-							<a class="sidebar-link" href="index.html">
+							<a class="sidebar-link" href="/index.html">
 	              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-	            </a>
+	            </a>	
 						</li>
-	
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="pages-profile.html">
-	              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-	            </a>
-						</li>
-	
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="pages-sign-in.html">
-	              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
-	            </a>
-						</li>
-	
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="pages-sign-up.html">
-	              <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign Up</span>
-	            </a>
-						</li>
-	
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="pages-blank.html">
-	              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
-	            </a>
-						</li>
+						<c:choose>
+							<c:when test="${sessionScope.LoginID != null }">
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/member/MyPage">
+		              					<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+		            				</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/member/MemberLoginPage">
+						              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+						            </a>
+								</li>
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/member/MemberJoinForm">
+			              				<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign Up</span>
+			            			</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
 	
 						<li class="sidebar-header">
 							Tools & Components
@@ -279,18 +276,18 @@
 	                <i class="align-middle" data-feather="settings"></i>
 	              </a>
 	
-								<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 								<c:choose>
-									<c:when test="${sessionScope.LoginID != null }">
+										<c:when test="${sessionScope.LoginID != null }">
+									<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 										${sessionScope.LoginNickName }
+					             	</a>
 									</c:when>
 									<c:otherwise>
-										<span class="text-dark"><a href="member/MemberLoginPage">로그인</a><br></span>
+										<span class="text-dark"><a href="/member/MemberLoginPage">Login</a><br></span>
 									</c:otherwise>
 								</c:choose>
 		
 	                			
-	              </a>
 								<div class="dropdown-menu dropdown-menu-end">
 									<a class="dropdown-item" href="member/MyPage"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 									<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>

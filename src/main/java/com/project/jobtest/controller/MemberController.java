@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.jobtest.service.MemberService;
@@ -26,12 +27,12 @@ public class MemberController {
 	
 	@RequestMapping(value = "/MemberLoginPage", method = RequestMethod.GET)
 	public String MemberLoginPage(Model model, HttpSession session) {
-		return "member/MemberLoginPage";
+		return "/member/MemberLoginPage";
 	}
 	
 	@RequestMapping(value = "/MemberJoinForm", method = RequestMethod.GET)
 	public String MemberJoinForm() {
-		return "member/MemberJoinForm";
+		return "/member/MemberJoinForm";
 	}
 
 	@RequestMapping(value = "join", method = RequestMethod.POST)
@@ -42,7 +43,7 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/CheckId", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
-	public String CheckId(String member_id) {
+	public String CheckId(@RequestParam("member_id") String member_id) {
 		int cnt = service.IdCheck(member_id);
 		String str = Integer.toString(cnt);
 		return str;
@@ -50,7 +51,7 @@ public class MemberController {
 	
 	@ResponseBody			//ajax를 사용하기위해 붙여줘야함 
 	@RequestMapping(value = "/CheckNickname", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
-	public String CheckNickname(String member_nickname) {
+	public String CheckNickname(@RequestParam("member_nickname") String member_nickname) {
 		int cnt = service.NicknameCheck(member_nickname);
 		String str = Integer.toString(cnt);
 		return str;
@@ -89,19 +90,19 @@ public class MemberController {
 	
 	@RequestMapping(value = "/MemberFindForm", method = RequestMethod.GET)
 	public String MemberFindForm() {
-		return "member/MemberFindForm";
+		return "/member/MemberFindForm";
 	}
 	
 	@RequestMapping(value = "/MemberFind", method = RequestMethod.POST)
 	public String MemberFind(memberVO member, Model model) {
 		String member_id = service.MemberFind(member);
 		model.addAttribute("member_id", member_id);
-		return "member/FindResult";
+		return "/member/FindResult";
 	}
 	
 	@RequestMapping(value = "/PwFindForm", method = RequestMethod.GET)
 	public String PwFindForm() {
-		return "member/PwFindForm";
+		return "/member/PwFindForm";
 	}
 	
 	@RequestMapping(value = "/PwFind", method = RequestMethod.POST)
@@ -110,7 +111,7 @@ public class MemberController {
 		if(member_id!=null) {
 			model.addAttribute("member_id", member_id);
 		}
-		return "member/PwFindResult";
+		return "/member/PwFindResult";
 	}
 	
 	@RequestMapping(value = "/PwChange", method = RequestMethod.POST)
@@ -126,6 +127,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value = "/MemberDelete", method = RequestMethod.GET)
+	public String MemberDelete(String member_id, HttpSession session) throws IOException{
+		System.out.println(member_id);
+		service.MemberDelete(member_id);
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 	@RequestMapping(value = "/MyPage", method = RequestMethod.GET)
 	public String MyPage(HttpSession session, Model model) {
 		System.out.println("여기는 컨트롤러");
@@ -138,7 +147,7 @@ public class MemberController {
 		model.addAttribute("LoginNickName", member_nickname);
 		System.out.println("받아옴?");
 		
-		return "member/MyPage"; 
+		return "/member/MyPage"; 
 	}
 	
 }
