@@ -104,5 +104,12 @@
 		where
 			member_id = #{member_id}
 	</select>
+	
+	<delete id="MemberDelete" parameterType="string">
+		delete from
+			member
+		where
+			member_id = #{member_id}
+	</delete>
 
 </mapper>

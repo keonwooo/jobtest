@@ -88,5 +88,9 @@ public class MemberService {
 		hash = dao.MemberSelectOneAll(member_id);
 		return hash;
 	}
+
+	public void MemberDelete(String member_id) {
+		dao.MemberDelete(member_id);
+	}
 	
 }
