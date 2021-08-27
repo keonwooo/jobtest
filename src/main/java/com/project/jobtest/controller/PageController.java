@@ -37,4 +37,9 @@ public class PageController {
 	public String index() {
 		return "index";
 	}
+	
+	@RequestMapping(value = "/NewFile", method = RequestMethod.GET)
+	public String newFile() {
+		return "/member/NewFile";
+	}
 }

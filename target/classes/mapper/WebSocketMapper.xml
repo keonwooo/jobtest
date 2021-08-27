@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.jobtest.dao.WebSocketMapper">
+
+	<select id="selectChatRoom" resultType="chatroom" parameterType="string">
+		select
+			member_id
+			,member_nickname
+			,Master_id
+			,Master_nickname
+			,UnReadCount
+		from
+			chatroom
+		where
+			roomId = #{roomId}
+	</select>
+	
+	<insert id="insertMessage" parameterType="chatmessage">
+		insert into 
+		    chatmessage(
+		        roomId
+		        ,messageId
+		        ,message
+		        ,member_nickname
+		        ,member_id
+		        ,member_name
+		        ,unReadCount
+		        ,sessionCount
+		    )values(
+		       	#{roomId}
+		        ,#{messageId}
+		        ,#{message}
+		        ,#{member_nickname}
+		        ,#{member_id}
+		        ,#{member_name}
+		        ,#{unReadCount}
+		        ,#{sessionCount}
+			)
+	</insert>
+	
+	<update id="updateCount" parameterType="chatmessage">
+		update
+				chatmessage
+			set
+				unReadCount = 0
+			where
+				roomId = #{roomId}
+	</update>
+	
+	<select id="messageList" parameterType="string" resultType="list">
+		select
+			roomId
+		    ,messageId
+		    ,message
+		    ,member_nickname
+		    ,member_id
+		    ,member_name
+		    ,unReadCount
+		    ,sessionCount
+		from
+			chatmessage
+		where
+			roomId = #{roomId}
+	</select>
+	
+	<!-- <select id="searchChatRoom" parameterType="chatroom" resultType="chatroom">
+		select
+			member_id
+			,member_nickname
+			,Master_id
+			,Master_nickname
+			,UnReadCount
+			,roomId
+		from
+			chatroom
+		where
+	
+	</select> -->
+</mapper>

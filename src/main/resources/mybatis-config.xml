@@ -8,11 +8,16 @@
 		<typeAlias type="com.project.jobtest.vo.ChatRoomVO" alias="room"/>
 		<typeAlias type="com.project.jobtest.vo.messageVO" alias="message"/>
 		<typeAlias type="com.project.jobtest.vo.workVO" alias="work"/>
+		<typeAlias type="com.project.jobtest.vo.ChatMessage" alias="chatmessage"/>
+		<typeAlias type="com.project.jobtest.vo.ChatRoom" alias="chatroom"/>
+		<typeAlias type="com.project.jobtest.vo.UserMaster" alias="usermaster"/>
+		<typeAlias type="com.project.jobtest.vo.ChatSession" alias="chatsession"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
 		<mapper resource="mapper/ChatMapper.xml"/>
 		<mapper resource="mapper/WorkMapper.xml"/>
+		<mapper resource="mapper/WebSocketMapper.xml"/>
 	</mappers>
 </configuration>
