@@ -267,7 +267,7 @@
 										</a>
 									</div>
 									<div class="dropdown-menu-footer">
-										<a href="#" class="text-muted">Show all messages</a>
+										<a href="/chat" class="text-muted">Show all messages</a>
 									</div>
 								</div>
 							</li>
@@ -447,9 +447,6 @@
 					infoWindow.open(map, marker);
 					
 					$('.clicktest').click(function(){
-						if(${target.seq} === ${list.work_seq}){
-							alert("ok");
-						}
 						
 			        	e.classList.toggle('collapsed-1');
 			        });

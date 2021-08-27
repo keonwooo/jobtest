@@ -191,7 +191,7 @@
 <div class="wrapper">
 			<nav id="sidebar" class="sidebar js-sidebar">
 				<div class="sidebar-content js-simplebar">
-					<a class="sidebar-brand" href="index.html">
+					<a class="sidebar-brand" href="/index.html">
 	          <span class="align-middle">AdminKit</span>
 	        </a>
 	
@@ -424,7 +424,7 @@
 										</a>
 									</div>
 									<div class="dropdown-menu-footer">
-										<a href="#" class="text-muted">Show all messages</a>
+										<a href="/chat" class="text-muted">Show all messages</a>
 									</div>
 								</div>
 							</li>
