@@ -30,8 +30,8 @@
 		<div class="wrapper">
 			<nav id="sidebar" class="sidebar js-sidebar collapsed">
 				<div class="sidebar-content js-simplebar">
-					<a class="sidebar-brand" href="index.html">
-	          <span class="align-middle">AdminKit</span>
+					<a class="sidebar-brand" href="/">
+	          <span class="align-middle">HOME</span>
 	        </a>
 	
 					<ul class="sidebar-nav">
@@ -300,13 +300,14 @@
 							</li>
 						</ul>
 					</div>
+					<div id="search">
+						<input type="text" id="search_input" placeholder="목적지 입력"/>
+						<button id="search_btn">검색</button>
+					</div>
 				</nav>
 	
 				<main class="content">
-					<div id="search">
-						<input type="text" id="search_input" placeholder="목적지 입력"/>
-						<button id="search_button">검색</button>
-					</div>
+					
 					<div id="map" style="width:100%; height: 100vh;"></div>
 					<ul class="showDetail collapsed-1">
 						<c:forEach items="${list }" var="list">
@@ -373,7 +374,7 @@
 		</div>
 	
 		<script src="/resources/js/app.js"></script>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8862ea6580612c11c1adaf233a163b08"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8862ea6580612c11c1adaf233a163b08&libraries=services"></script>
 		<script type="text/javascript">
 		/* 지도 생성 띄우기*/
 		var mapOptions = {
@@ -434,7 +435,6 @@
 	        
 		}
 		
-		
 		function getClickHandler(i){
 			return function(){
 				var marker = markers[i],
@@ -456,16 +456,62 @@
 		}
 		
 		
+		// 지도 클릭시 infoWindow.close
+		function clickMap(i){
+			return function() {
+				var infoWindow = infoWindows[i];
+				infoWindow.close();
+			}
+		}
 		
 		
-		//네이버 추가
+		
+		
 		for (var i=0, ii=markers.length; i<ii; i++) {
+		    naver.maps.Event.addListener(map, 'click', clickMap(i));
 		    naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 		}
 		
 	
+		let ps = new kakao.maps.services.Places();
+		let search_arr = [];
 		
+		$("#search_input").on("keydown",function(e){
+			if(e.keyCode === 13){
+				let content = $(this).val();
+				ps.keywordSearch(content, placeSearchCB);
+			}
+		});
 		
+		$("#search_btn").on("click",function(e){
+			let content = $("#search_input").val();
+			ps.keywordSearch(content, placeSearchCB);
+		});
+		
+		function placeSearchCB(data, status, pagination){
+			if(status === kakao.maps.services.Status.OK){
+				let target = data[0];
+				const lat = target.y;
+				const lng = target.x;
+				const latlng = new naver.maps.LatLng(lat, lng);
+				marker = new naver.maps.Marker({
+					position: latlng,
+					map: map
+				});
+				if(search_arr.length == 0 ){
+					search_arr.push(marker)
+					
+				}else{
+					search_arr.push(marker)
+					let pre_marker = search_arr.splice(0,1);
+					pre_marker[0].setMap(null);
+				}
+				map.setZoom(14, false);
+				map.panTo(latlng);
+			} else {
+				alert("false");
+			}
+		}
 		</script>
 	</body>
 
