@@ -44,7 +44,7 @@ a, link, visited{
 	border: none;
 }
 
-#search_button{
+#search_btn{
 	outline: no
 }
 
@@ -60,7 +60,7 @@ a, link, visited{
 }
 
 .collapsed-1 {
-	margin-right: -500px;
+	margin-right: -520px;
 }
  
 
