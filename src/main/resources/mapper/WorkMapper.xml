@@ -10,6 +10,8 @@
 				,work_system
 				,work_board
 				,work_price
+				,work_lat
+				,work_lng
 				,work_indate
 			)values(
 				SEQ_ID.nextval
@@ -17,6 +19,8 @@
 				,#{work_system}
 				,#{work_board}
 				,#{work_price}
+				,#{work_lat}
+				,#{work_lng}
 				,SYSDATE
 			)
 	</insert>
