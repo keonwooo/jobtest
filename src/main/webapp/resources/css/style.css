@@ -59,14 +59,29 @@ a, link, visited{
     background-color: #F5F5F5;
 }
 
+.short_img{
+	width: 100%;
+	
+}
+
 .collapsed-1 {
-	margin-right: -520px;
+	/* margin-right: -520px; */
+	display: none;
+}
+
+.btn_go_entry{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
 }
  
 
 .libox {
 	padding: 18px 25px 20px;
-	min-width: 500px;
+	width: 100%;
 }
 .dli-1 {
 	font-size: 1.8rem;
