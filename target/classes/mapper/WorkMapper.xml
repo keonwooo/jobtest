@@ -43,7 +43,7 @@
 		DESC
 	</select>
 	
-	<select id="selectOneList" resultType="work">
+	<select id="selectOneList" resultType="work" parameterType="int">
 		select
             work_seq
 			,work_title

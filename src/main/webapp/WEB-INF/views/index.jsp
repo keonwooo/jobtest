@@ -309,39 +309,12 @@
 				<main class="content">
 					
 					<div id="map" style="width:100%; height: 100vh;"></div>
-					<ul class="showDetail collapsed-1">
-						<c:forEach items="${list }" var="list">
-							<li class="libox">
-								<div class="item">
-									<a href="/work/detail?work_seq=${list.work_seq }">
-										<div>
-											<span class="dli-1">${list.work_title }</span>
-										</div>
-											
-									</a>
-									<a href="#">
-										<div>
-											<span class="dli-2">${list.work_system }</span>
-										</div>
-									
-									</a>
-								</div>
-								<div>
-									<a href="#">
-									<img src="http://placehold.it/110X112" />
-									</a>
-									<a href="#">
-									<img src="http://placehold.it/110X112" />
-									</a>
-									<a href="#">
-									<img src="http://placehold.it/110X112" />
-									</a>
-								</div>
-							</li>
-						</c:forEach>
-					</ul>												
+					<div>
+						<ul class="showDetail collapsed-1 " id="placesList">
+						
+						</ul>					
+					</div>
 				</main>
-	
 				<footer class="footer">
 					<div class="container-fluid">
 						<div class="row text-muted">
@@ -376,6 +349,7 @@
 		<script src="/resources/js/app.js"></script>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8862ea6580612c11c1adaf233a163b08&libraries=services"></script>
 		<script type="text/javascript">
+		
 		/* 지도 생성 띄우기*/
 		var mapOptions = {
 		    center: new naver.maps.LatLng(37.520659, 126.982254),
@@ -409,6 +383,8 @@
 		
 		for (var i in data){
 			
+			var targett_seq = document.getElementById("target_seq").value;
+			
 			var target = data[i];
 			var latlng = new naver.maps.LatLng(target.lat, target.lng);
 			
@@ -416,15 +392,58 @@
 			    position: latlng,
 			    map: map
 			});
-			// OnClick="location.href='/work/detail?work_seq=`+ target.seq +`'
+			
+			let listEl = document.getElementById("placesList");
+			const el = document.createElement("li");
+			const itemStr = `
+						<div class="item">
+							<a href="#">
+								<div>
+									<span class="dli-1">`+target.title+`</span>
+								</div>
+									
+							</a>
+							<a href="#">
+								<div>
+									<span class="dli-2">`+target.system+`</span>
+								</div>
+							
+							</a>
+						</div>
+						<div class="short_img">
+							<a href="#">
+							<img src="http://placehold.it/110X112" />
+							</a>
+							<a href="#">
+							<img src="http://placehold.it/110X112" />
+							</a>
+							<a href="#">
+							<img src="http://placehold.it/110X112" />
+							</a>
+						</div>		
+			`
+			
+			el.innerHTML = itemStr;
+			el.classname = "libox";
+			el.id = "`+target.seq+`";
+			
+			listEl.appendChild(el);
+			/* <form action="/work/detail?work_seq=`+ target.seq +`" method="get"> 
+			</form>
+			*/
+			// 
 			var content = 
-				`<div class="infowindow_wrap clicktest">
-				<div class="infowindow_seq">`+ target.seq +`</div>
-	            <div class="infowindow_title">`+ target.title +`</div>
-	            <div class="infowindow_content">`+ target.board +`</div>
-	            <div class="infowindow_date">`+ target.indate +`</div>
-	        	</div>`
-				
+				`
+				<div class="infowindow_wrap">
+				<p><label>bno</label> <input type="text" name ="work_seq" value ="`+target.seq+`" readonly="readonly"></p>
+				<p><label>제목</label> <input type="text" name ="work_title" value ="`+target.title+`" readonly="readonly"></p>
+				<p><label>유형</label> <input type="text" name="work_system" size="15" value = "`+target.system+`"readonly="readonly"><p>
+				<p><label>가격</label> <input type="text" name ="work_price" value ="`+target.price+`" readonly="readonly"></p>
+				<button type="button" class="btn_go_entry" onclick="getData(`+target.seq+`)"></button>
+				<input type="hidden" value = "`+target.seq+`" id="target_seq">
+				</div>
+				`
+			
 			
 			var infoWindow = new naver.maps.InfoWindow({
 			    content: content
@@ -433,7 +452,32 @@
 	        markers.push(marker);
 	        infoWindows.push(infoWindow);
 	        
+	       
+	        
+	        
 		}
+		
+		 function getData() {
+			
+				 $.ajax({
+						type:"get",  //전송타입
+						url:`/work/detail?work_seq=`+target.seq,//서버요청대상파일
+		/* 				dataType:"text",  //응답타입 */
+						success: function (data) {
+							alert("성공:"+ target.seq);
+							console.log(data);
+							
+						},
+						error: function () {
+							alert("실패");
+						}
+					});
+			 
+			
+			}
+	       
+	        	
+	        
 		
 		function getClickHandler(i){
 			return function(){
@@ -445,15 +489,17 @@
 					infoWindow.close();
 				} else {
 					infoWindow.open(map, marker);
-					
-					$('.clicktest').click(function(){
+					$('.btn_go_entry').click(function(){
 						
 						
-			        	e.classList.toggle('collapsed-1');
+						e.classList.toggle('collapsed-1');
 			        });
+					
 				}
 			}
 		}
+		
+	
 		
 		
 		// 지도 클릭시 infoWindow.close
@@ -472,11 +518,13 @@
 		    naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 		}
 		
+		
+		// 검색 기능 구현
 	
-		let ps = new kakao.maps.services.Places();
+		let ps = new kakao.maps.services.Places(); 
 		let search_arr = [];
 		
-		$("#search_input").on("keydown",function(e){
+		$("#search_input").on("keydown",function(e){	// keyCode 13 enter 입력시 이벤트 
 			if(e.keyCode === 13){
 				let content = $(this).val();
 				ps.keywordSearch(content, placeSearchCB);
@@ -489,11 +537,13 @@
 		});
 		
 		function placeSearchCB(data, status, pagination){
-			if(status === kakao.maps.services.Status.OK){
+			if(status === kakao.maps.services.Status.OK){	//카카오 맵 연결상태 체크
+				
 				let target = data[0];
 				const lat = target.y;
 				const lng = target.x;
 				const latlng = new naver.maps.LatLng(lat, lng);
+				
 				marker = new naver.maps.Marker({
 					position: latlng,
 					map: map
