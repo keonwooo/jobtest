@@ -139,6 +139,9 @@
 	
 					<div class="navbar-collapse collapse">
 						<ul class="navbar-nav navbar-align">
+							<li class="nav-item">
+								<a href="/work/Write"><div class="newWork">New Work</div></a>
+							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
 									<div class="position-relative">
@@ -309,10 +312,8 @@
 				<main class="content">
 					
 					<div id="map" style="width:100%; height: 100vh;"></div>
-					<div>
-						<ul class="showDetail collapsed-1 " id="placesList">
-						
-						</ul>					
+					<div class="showDetail collapsed-1" id="placesList" >
+					
 					</div>
 				</main>
 				<footer class="footer">
@@ -364,7 +365,8 @@
 		// markerlist,infowindowlist
 		var markers = [],
 			infoWindows = [];
-		
+			data2 = [];
+	
 		// data에 데이터 배열로 삽입
 		var data = new Array();
 		
@@ -383,7 +385,6 @@
 		
 		for (var i in data){
 			
-			var targett_seq = document.getElementById("target_seq").value;
 			
 			var target = data[i];
 			var latlng = new naver.maps.LatLng(target.lat, target.lng);
@@ -393,7 +394,7 @@
 			    map: map
 			});
 			
-			let listEl = document.getElementById("placesList");
+			/*let listEl = document.getElementById("placesList");
 			const el = document.createElement("li");
 			const itemStr = `
 						<div class="item">
@@ -427,7 +428,7 @@
 			el.classname = "libox";
 			el.id = "`+target.seq+`";
 			
-			listEl.appendChild(el);
+			listEl.appendChild(el); 
 			/* <form action="/work/detail?work_seq=`+ target.seq +`" method="get"> 
 			</form>
 			*/
@@ -440,61 +441,99 @@
 				<p><label>유형</label> <input type="text" name="work_system" size="15" value = "`+target.system+`"readonly="readonly"><p>
 				<p><label>가격</label> <input type="text" name ="work_price" value ="`+target.price+`" readonly="readonly"></p>
 				<button type="button" class="btn_go_entry" onclick="getData(`+target.seq+`)"></button>
-				<input type="hidden" value = "`+target.seq+`" id="target_seq">
 				</div>
 				`
-			
 			
 			var infoWindow = new naver.maps.InfoWindow({
 			    content: content
 			});
-	        
+				
+			
 	        markers.push(marker);
 	        infoWindows.push(infoWindow);
-	        
-	       
-	        
-	        
 		}
 		
-		 function getData() {
-			
-				 $.ajax({
-						type:"get",  //전송타입
-						url:`/work/detail?work_seq=`+target.seq,//서버요청대상파일
-		/* 				dataType:"text",  //응답타입 */
-						success: function (data) {
-							alert("성공:"+ target.seq);
-							console.log(data);
+	
+		
+		function showdetail(workvo, bl){
+			let detailEl = document.getElementById("placesList");
+		/* 	const el = document.createElement("li"); */
+			const itemStr = `
+				<div class= "item_wrap">
+						<div class="short_img">
+							<a href="#">
+								<img src="http://placehold.it/110X112" />
+							</a>
+							<a href="#">
+								<img src="http://placehold.it/110X112" />
+							</a>
+							<a href="#">
+								<img src="http://placehold.it/110X112" />
+							</a>
+						</div>	
+						<div class="item">
+							<a href="#">
+								<div>
+									<span class="dli-1">`+workvo.work_title+`</span>
+								</div>
+									
+							</a>
+							<a href="#">
+								<div>
+									<span class="dli-2">`+workvo.work_system+`</span>
+								</div>
 							
-						},
-						error: function () {
-							alert("실패");
-						}
-					});
-			 
+							</a>
+						</div>
+							
+					</div>
+			`	
 			
-			}
+			/* el.innerHTML = itemStr;
+			el.className += "libox"; */
+			
+			detailEl.innerHTML = itemStr;
+			
+			//el.id = "`+target.seq+`";
+			/* listEl.appendChild(el);  */
+			
+			
+		}
+		
+		
+		function getData(a) {
+			$.ajax({
+				type:"get",  //전송타입
+				url:`/work/detail?work_seq=`+a,//서버요청대상파일
+/* 				dataType:"text",  //응답타입 */
+				success: function (workvo) {
+					const e = document.querySelector('.showDetail');
+					showdetail(workvo);
+					e.classList.toggle('collapsed-1'); 
+			        
+				},
+				error: function (workvo) {
+					alert("존재하지 않는 글입니다.");
+				}
+			});
+		}  	
 	       
-	        	
-	        
+	
+		/* $('.btn_go_entry').click(function(){
+			
+			
+        }); */
 		
 		function getClickHandler(i){
 			return function(){
 				var marker = markers[i],
 				 	infoWindow = infoWindows[i];
-				var e = document.querySelector('.showDetail');
+				
 				
 				if(infoWindow.getMap()){
 					infoWindow.close();
 				} else {
 					infoWindow.open(map, marker);
-					$('.btn_go_entry').click(function(){
-						
-						
-						e.classList.toggle('collapsed-1');
-			        });
-					
 				}
 			}
 		}

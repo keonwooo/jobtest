@@ -48,27 +48,6 @@ a, link, visited{
 	outline: no
 }
 
-.showDetail {
-	padding-left: 0;
-	margin-bottom: 0;
-	height:100%;
-	direction: ltr;
-	list-style: none;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: #F5F5F5;
-}
-
-.short_img{
-	width: 100%;
-	
-}
-
-.collapsed-1 {
-	/* margin-right: -520px; */
-	display: none;
-}
-
 .btn_go_entry{
 	position: absolute;
     top: 0;
@@ -77,16 +56,66 @@ a, link, visited{
     height: 100%;
     background-color: transparent;
 }
- 
 
-.libox {
-	padding: 18px 25px 20px;
-	width: 100%;
+.collapsed-1 {
+	margin-right: -390px;  
+	display: none;
 }
+
+
+.showDetail {
+	display: flex ; 
+	padding-left: 0;
+	margin-bottom: 0;
+	min-width:390px;
+	height:100%;
+	/* direction: ltr;
+	list-style: none; */
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #F5F5F5;
+}
+
+.item_wrap {
+	display: flex;
+	min-width: 390px;
+	flex-direction: column;
+	padding: 18px 25px 20px;
+	align-items: center;
+}
+
 .dli-1 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	font-size: 1.8rem;
 }
 
 .dli-2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	font-size: 1.4rem;
 }
+
+.short_img{
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+}
+
+.short_img>a>img{
+	flex: 1;
+	margin: 0 2;
+}
+
+.create_board{
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+
+
