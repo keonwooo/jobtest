@@ -312,8 +312,21 @@
 				<main class="content">
 					
 					<div id="map" style="width:100%; height: 100vh;"></div>
-					<div class="showDetail collapsed-1" id="placesList" >
-					
+					<div class="showDetail" id="placesList" >
+						<c:if test="${not empty list }">
+							<ul style="list-style-type: none;">
+							<c:forEach items="${list }" var="job_list" varStatus="status">
+								<li onclick="getData(${job_list.work_seq})" style="cursor: pointer;">
+										<hr style="width:300px;">
+										<h3>
+											${job_list.work_title }
+										</h3>
+											희망 가격 : ${job_list.work_price }원
+										<hr style="width:300px">
+								</li>
+							</c:forEach>
+							</ul>
+						</c:if>
 					</div>
 				</main>
 				<footer class="footer">
@@ -472,18 +485,35 @@
 							</a>
 						</div>	
 						<div class="item">
-							<a href="#">
-								<div>
-									<span class="dli-1">`+workvo.work_title+`</span>
-								</div>
-									
-							</a>
-							<a href="#">
-								<div>
-									<span class="dli-2">`+workvo.work_system+`</span>
-								</div>
-							
-							</a>
+								<hr style="width:300px">
+								<table width="300px" align="center">
+									<tr>
+										<p><td align = "right" width="150px" style="font-size:xx-large;"> `+workvo.work_title+` </td>
+										<p><td align = "left" width="150px" style="padding-top:10px"> `+workvo.work_system+` </td>
+									</tr>
+								</table>
+								<hr>
+								<table width="300px" height="300px">
+									<tr>
+										<p><td align="left" style="vertical-align:top;"> `+workvo.work_board+`</td>
+									</tr>
+								</table>
+								<hr>
+								<table width="300px" >
+									<tr>
+										<p><td align="left">희망 가격 : `+workvo.work_price+`</td>
+									</tr>
+									<tr height="10px"></tr>
+									<tr>
+										<td>
+											<input type="button" value="수락" style="width:150px; height:40px;">
+										</td>
+										<td>
+											<input type="button" value="목록" style="width:150px; height:40px;" onclick="location.href='/'">
+										</td>
+									</tr>
+								</table>
+								
 						</div>
 							
 					</div>
@@ -509,7 +539,6 @@
 				success: function (workvo) {
 					const e = document.querySelector('.showDetail');
 					showdetail(workvo);
-					e.classList.toggle('collapsed-1'); 
 			        
 				},
 				error: function (workvo) {
@@ -534,14 +563,6 @@
 					infoWindow.close();
 				} else {
 					infoWindow.open(map, marker);
-<<<<<<< HEAD
-					
-					$('.clicktest').click(function(){
-						
-			        	e.classList.toggle('collapsed-1');
-			        });
-=======
->>>>>>> origin/song2
 				}
 			}
 		}
@@ -609,6 +630,13 @@
 				alert("false");
 			}
 		}
+		
+		
+		function job_list(){
+			href="/";
+		}
+		
+		
 		</script>
 	</body>
 
