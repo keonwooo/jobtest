@@ -328,7 +328,7 @@
 									<input type="hidden" id="work_lng" name="work_lng" value="lng">
 									<br>
 								<input type="submit" value="확인" >
-								<input type="button" value="취소" >
+								<input type="button" onclick="location.href='/'" value="취소" >
 							</form>
 						</div>
 					
