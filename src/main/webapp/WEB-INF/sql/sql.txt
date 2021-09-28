@@ -21,10 +21,23 @@ create table message(
 );
 
 create table chatroom(
-	chatroom_id				number			primary key
-	,MEMBER_member_id		varchar2(50)	not null
-	,TUTOR_MEMBER_member_id	varchar2(50)	not null
-	,CLASS_class_id				number			not null
+	roomId				varchar2(50)	primary key
+	,member_id		    varchar2(50)	not null
+    ,member_nickname    varchar2(50)    not null
+	,Master_id	        varchar2(50)	not null
+    ,Master_nickname    varchar2(50)    not null
+	,UnReadCount        int             not null
+);
+
+create table chatmessage(
+    roomId              varchar2(50)    primary key
+    ,messageId          varchar2(50)
+    ,message            varchar2(4000)
+    ,member_nickname    varchar2(50)    not null
+    ,member_id          varchar2(50)    not null
+    ,member_name        varchar2(50)    not null
+    ,unReadCount        int             not null
+    ,sessionCount       int             not null
 );
 
 create table work(
@@ -36,6 +49,11 @@ create table work(
     ,work_lat               number          null
     ,work_lng              number          null
     ,work_indate			date          default SYSDATE
+);
+
+create table UserMaster(
+    member_id           varchar2(50)    primary key
+    ,member_nickname    varchar2(50)    
 );
 
 CREATE SEQUENCE SEQ_ID INCREMENT BY 1 START WITH 1;
