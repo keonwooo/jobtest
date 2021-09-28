@@ -49,7 +49,8 @@ public class WorkController {
 
 		ws.insertWorkList(work);
 
-		return "redirect:/work/";
+		System.out.println(work);
+		return "redirect:/";
 	}
 	
 //	Read

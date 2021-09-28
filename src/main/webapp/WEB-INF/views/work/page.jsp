@@ -307,7 +307,9 @@
 						<input type="text" id="search_input" placeholder="목적지 입력"/>
 						<button id="search_btn">검색</button>
 					</div>
-					div.
+					<div id="u_loc">
+						<span>내 위치</span>
+					</div>
 				</nav>
 	
 				<main class="content" style="justify-content: normal">
@@ -319,9 +321,11 @@
 									<tr><th>타이틀</th><td><input type="text" name="work_title"  placeholder="title"></td></tr>
 									<tr><th>유형</th><td><input type="text" name="work_system"  placeholder="유형"></td></tr>
 									<tr><th>글내용</th><td><textarea name="work_board"  placeholder="내용"cols="20" rows="20"></textarea></td></tr>
-									<tr><th>가격</th><td><input type="text" name="work_price"  placeholder="가격"></td></tr>
-									<tr><th>주소</th><td><input type="text" id="sample5_address" placeholder="주소"><input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"></td></tr>
+									<tr><th>가격</th><td><input type="text" name="work_price"  placeholder="가격" value="500"></td></tr>
+									<tr><th>주소</th><td><input type="text" id="sample5_address" placeholder="주소"><input type="button" onclick="DaumPostcode()" value="주소 검색"></td></tr>
 								</table>
+									<input type="hidden" id="work_lat" name="work_lat" value="lat">
+									<input type="hidden" id="work_lng" name="work_lng" value="lng">
 									<br>
 								<input type="submit" value="확인" >
 								<input type="button" value="취소" >
@@ -362,6 +366,7 @@
 	
 		<script src="/resources/js/app.js"></script>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8862ea6580612c11c1adaf233a163b08&libraries=services"></script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script type="text/javascript">
 		
 		/* 지도 생성 띄우기*/
@@ -410,7 +415,7 @@
 
 	
 		
-		$("#search_btn").on("click",function(){
+		$("#u_loc").on("click",function(){
 			if (navigator.geolocation) {
 		        /**
 		         * navigator.geolocation 은 Chrome 50 버젼 이후로 HTTP 환경에서 사용이 Deprecate 되어 HTTPS 환경에서만 사용 가능 합니다.
@@ -427,7 +432,45 @@
 		});
 		// 내위치 끝
 		
-		
+		// 다음 우편 검색 api
+		function DaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+                
+                
+                console.log(data)
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = addr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new naver.maps.LatLng(result.y, result.x);
+            
+                        console.log(result.y)
+                        document.getElementById("work_lat").value = result.y;
+                        document.getElementById("work_lng").value = result.x;
+                        
+                        
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        map.setZoom(14);
+                        
+                        var marker = new naver.maps.Marker({
+            		        position: new naver.maps.LatLng(coords),
+            		        map: map
+            		    });
+                    }
+                });
+            }
+        }).open();
+    }
 		</script>
 	</body>
 

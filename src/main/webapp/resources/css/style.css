@@ -48,6 +48,18 @@ a, link, visited{
 	outline: no
 }
 
+#u_loc{
+	position: absolute;
+	top:170px;
+	left: 10px;
+	padding: 15px;
+	z-index: 10000;
+	background: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	text-align: center;
+}
+
 .btn_go_entry{
 	position: absolute;
     top: 0;
