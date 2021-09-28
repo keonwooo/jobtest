@@ -10,6 +10,8 @@
 				,work_system
 				,work_board
 				,work_price
+				,work_lat
+				,work_lng
 				,work_indate
 			)values(
 				SEQ_ID.nextval
@@ -17,6 +19,8 @@
 				,#{work_system}
 				,#{work_board}
 				,#{work_price}
+				,#{work_lat}
+				,#{work_lng}
 				,SYSDATE
 			)
 	</insert>
@@ -39,7 +43,7 @@
 		DESC
 	</select>
 	
-	<select id="selectOneList" resultType="work">
+	<select id="selectOneList" resultType="work" parameterType="int">
 		select
             work_seq
 			,work_title

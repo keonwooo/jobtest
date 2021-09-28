@@ -48,4 +48,6 @@ public class WorkService {
 		dao.deleteList(work_seq);
 	}
 
+	
+
 }

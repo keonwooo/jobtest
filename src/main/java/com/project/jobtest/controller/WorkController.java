@@ -27,6 +27,16 @@ public class WorkController {
 	
 //	TEST
 	
+	@ResponseBody
+	@RequestMapping(value = "/listone", method = RequestMethod.GET)
+	public int selectAllList(@RequestParam("work_seq")int work_seq) {
+		
+		
+		System.out.println(work_seq);
+		
+		return work_seq;
+	}
+	
 	@RequestMapping(value = "/test")
 	public String test() {
 		
@@ -66,14 +76,17 @@ public class WorkController {
 	}
 	
 	// 상세 
+	@ResponseBody
 	@RequestMapping(value = "/detail", method = RequestMethod.GET )
-	public String selectOneList(@RequestParam("work_seq")int work_seq,Model model) {
+	public workVO selectOneList(@RequestParam("work_seq")int work_seq,Model model) {
 		
 		
 		
-		model.addAttribute(ws.selectOneList(work_seq));
+		workVO workvo = ws.selectOneList(work_seq);
 		
-		return "/work/detail";
+		/* model.addAttribute(ws.selectOneList(work_seq)); */
+		
+		return workvo;
 	}
 
 	// 수정 
