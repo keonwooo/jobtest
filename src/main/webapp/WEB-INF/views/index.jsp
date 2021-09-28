@@ -509,7 +509,7 @@
 											<input type="button" value="수락" style="width:150px; height:40px;">
 										</td>
 										<td>
-											<input type="button" value="목록" style="width:150px; height:40px;" onclick="location.href='/'">
+											<input type="button" value="목록" style="width:150px; height:40px;" onclick="getList()">
 										</td>
 									</tr>
 								</table>
@@ -528,6 +528,32 @@
 			/* listEl.appendChild(el);  */
 			
 			
+		}
+		
+		function getList(){
+			let detailEl = document.getElementById("placesList");
+			/* 	const el = document.createElement("li"); */
+				const itemStr = `
+					<c:if test="${not empty list }">
+					<ul style="list-style-type: none;">
+					<c:forEach items="${list }" var="job_list" varStatus="status">
+						<li onclick="getData(${job_list.work_seq})" style="cursor: pointer;">
+								<hr style="width:300px;">
+								<h3>
+									${job_list.work_title }
+								</h3>
+									희망 가격 : ${job_list.work_price }원
+								<hr style="width:300px">
+						</li>
+					</c:forEach>
+					</ul>
+				</c:if>
+				`	
+				
+				/* el.innerHTML = itemStr;
+				el.className += "libox"; */
+				
+				detailEl.innerHTML = itemStr;
 		}
 		
 		
