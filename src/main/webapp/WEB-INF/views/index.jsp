@@ -307,6 +307,9 @@
 						<input type="text" id="search_input" placeholder="목적지 입력"/>
 						<button id="search_btn">검색</button>
 					</div>
+					<div id="u_loc">
+						<span>내 위치</span>
+					</div>
 				</nav>
 	
 				<main class="content">
@@ -367,7 +370,8 @@
 		/* 지도 생성 띄우기*/
 		var mapOptions = {
 		    center: new naver.maps.LatLng(37.520659, 126.982254),
-		    zoom: 14
+		    zoom: 14,
+		   
 		}
 
 		var map = new naver.maps.Map('map',mapOptions);
@@ -378,7 +382,7 @@
 		// markerlist,infowindowlist
 		var markers = [],
 			infoWindows = [];
-			data2 = [];
+			data = [];
 	
 		// data에 데이터 배열로 삽입
 		var data = new Array();
@@ -662,7 +666,96 @@
 			href="/";
 		}
 		
+		// 내위치
+		var infowindow = new naver.maps.InfoWindow();
 		
+		function onSuccessGeolocation(position) {
+		    var location = new naver.maps.LatLng(position.coords.latitude,
+		                                         position.coords.longitude);
+		
+		    map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+		    map.setZoom(14); // 지도의 줌 레벨을 변경합니다.
+		
+		    var marker = new naver.maps.Marker({
+		        position: new naver.maps.LatLng(location),
+		        map: map
+		    });
+		    
+		   
+		    /* infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
+		
+		    infowindow.open(map, location);
+		    console.log('Coordinates: ' + position.coords.latitude); */
+		}
+		
+		function onErrorGeolocation() {
+		    var center = map.getCenter();
+		
+		   /*  infowindow.setContent('<div style="padding:20px;">' +
+		        '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
+		
+		    infowindow.open(map, center); */
+		}
+
+	
+		
+		$("#u_loc").on("click",function(){
+			if (navigator.geolocation) {
+		        /**
+		         * navigator.geolocation 은 Chrome 50 버젼 이후로 HTTP 환경에서 사용이 Deprecate 되어 HTTPS 환경에서만 사용 가능 합니다.
+		         * http://localhost 에서는 사용이 가능하며, 테스트 목적으로, Chrome 의 바로가기를 만들어서 아래와 같이 설정하면 접속은 가능합니다.
+		         * chrome.exe --unsafely-treat-insecure-origin-as-secure="http://example.com"
+		         */
+		        navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+		    } else {
+		     /*    var center = map.getCenter(); */
+		     /*    infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5></div>');
+		        infowindow.open(map, center); */
+		        alert("위치정보 불러오기 실패")
+		    }
+		});
+		// 내위치 끝
+		
+		
+		// 보이는 위치 마커
+		naver.maps.Event.addListener(map, 'idle', function() {
+		    updateMarkers(map, markers);
+		    console.log("--idle--")
+		
+		});
+		
+		function updateMarkers(map, markers) {
+		
+		    var mapBounds = map.getBounds(); //현재 화면에 표시되고 있는 지도 영역을 LatLngBounds 객체로 반환
+		    var marker, position;
+		
+		    for (var i = 0; i < markers.length; i++) {
+		
+		        marker = markers[i]
+		        position = marker.getPosition();
+		
+		        if (mapBounds.hasLatLng(position)) {
+		            showMarker(map, marker);
+		            showdetail();
+		          	console.log(marker)
+		        } else {
+		            hideMarker(map, marker);
+		        }
+		    }
+		}
+		
+		function showMarker(map, marker) {
+		
+		    if (marker.getMap()) return;
+		    marker.setMap(map);
+		}
+		
+		function hideMarker(map, marker) {
+		
+		    if (!marker.getMap()) return;
+		    marker.setMap(null);
+		}
+		// 보이는 위치 마커 끝
 		</script>
 	</body>
 
