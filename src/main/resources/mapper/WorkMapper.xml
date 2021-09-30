@@ -10,6 +10,7 @@
 				,work_system
 				,work_board
 				,work_price
+				,member_id
 				,work_lat
 				,work_lng
 				,work_indate
@@ -19,6 +20,7 @@
 				,#{work_system}
 				,#{work_board}
 				,#{work_price}
+				,#{member_id}
 				,#{work_lat}
 				,#{work_lng}
 				,SYSDATE
@@ -33,6 +35,7 @@
 			,work_system
 			,work_board
 			,work_price
+			,member_id
 			,work_lat
 			,work_lng
 			,work_indate
@@ -50,6 +53,7 @@
 			,work_system
 			,work_board
 			,work_price
+			,member_id
 			,work_lat
 			,work_lng
 			,work_indate
@@ -79,4 +83,59 @@
 		where
 			work_seq = #{work_seq}
 	</delete>
+	
+	<select id="selectAllList1" resultType="work">
+		select
+			work_seq
+			,work_title
+			,work_system
+			,work_board
+			,work_price
+			,member_id
+			,work_lat
+			,work_lng
+			,work_indate
+		from
+			work
+		order by
+			work_seq
+		ASC
+	</select>
+	
+	<select id="selectAllList2" resultType="work">
+		select
+			work_seq
+			,work_title
+			,work_system
+			,work_board
+			,work_price
+			,member_id
+			,work_lat
+			,work_lng
+			,work_indate
+		from
+			work
+		order by
+			work_price
+		DESC
+	</select>
+	
+	<select id="selectAllList3" resultType="work">
+		select
+			work_seq
+			,work_title
+			,work_system
+			,work_board
+			,work_price
+			,member_id
+			,work_lat
+			,work_lng
+			,work_indate
+		from
+			work
+		order by
+			work_price
+		ASC
+	</select>
+	
 </mapper>

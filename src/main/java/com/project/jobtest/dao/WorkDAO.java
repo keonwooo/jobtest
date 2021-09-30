@@ -80,6 +80,45 @@ public class WorkDAO implements WorkMapper{
 		}
 	}
 
+	public ArrayList<workVO> selectAllList1() {
+		WorkMapper mapper = session.getMapper(WorkMapper.class);
+		ArrayList<workVO> list1 = null;
+		
+		try {
+			list1 = mapper.selectAllList1();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list1;
+	}
+
+	public ArrayList<workVO> selectAllList2() {
+		WorkMapper mapper = session.getMapper(WorkMapper.class);
+		ArrayList<workVO> list2 = null;
+		
+		try {
+			list2 = mapper.selectAllList2();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list2;
+	}
+
+	public ArrayList<workVO> selectAllList3() {
+		WorkMapper mapper = session.getMapper(WorkMapper.class);
+		ArrayList<workVO> list3 = null;
+		
+		try {
+			list3 = mapper.selectAllList3();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list3;
+	}
+
 
 
 	

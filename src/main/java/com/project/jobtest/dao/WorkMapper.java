@@ -15,4 +15,10 @@ public interface WorkMapper {
 	void upDateList(workVO work);
 
 	void deleteList(int work_seq);
+
+	ArrayList<workVO> selectAllList1();
+
+	ArrayList<workVO> selectAllList2();
+
+	ArrayList<workVO> selectAllList3();
 }

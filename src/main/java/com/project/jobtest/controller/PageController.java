@@ -22,9 +22,18 @@ public class PageController {
 	public String selectAllList(Model model) {
 		
 		ArrayList<workVO> list = ws.selectAllList();
-		
-		
 		model.addAttribute("list", list);
+
+		ArrayList<workVO> list1 = ws.selectAllList1();
+		model.addAttribute("list1", list1);
+		
+		ArrayList<workVO> list2 = ws.selectAllList2();
+		model.addAttribute("list2", list2);
+
+		ArrayList<workVO> list3 = ws.selectAllList3();
+		model.addAttribute("list3", list3);
+		
+		
 		
 		return "/index";
 	}

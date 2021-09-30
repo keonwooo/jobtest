@@ -313,23 +313,35 @@
 				</nav>
 	
 				<main class="content">
-					
 					<div id="map" style="width:100%; height: 100vh;"></div>
-					<div class="showDetail" id="placesList" >
-						<c:if test="${not empty list }">
-							<ul style="list-style-type: none;">
-							<c:forEach items="${list }" var="job_list" varStatus="status">
-								<li onclick="getData(${job_list.work_seq})" style="cursor: pointer;">
-										<hr style="width:300px;">
-										<h3>
-											${job_list.work_title }
-										</h3>
+					<div>
+						<div align="right" style="margin-top: 50px; margin-right: 32px" id="sort_div">
+							<select id="sort">
+								<option value="1"  selected="selected">---정렬 기준---</option>
+								<option value="1">최신순</option>
+								<option value="2">오래된순</option>
+								<option value="3">높은 금액순</option>
+							    <option value="4">낮은 금액순</option>
+							</select>
+						</div>
+						<div class="showDetail" id="placesList" >
+							<c:if test="${not empty list }">
+								<ul style="list-style-type: none;">
+								<c:forEach items="${list }" var="job_list" varStatus="status">
+									<li onclick="getData(${job_list.work_seq})" style="cursor: pointer;">
+											<hr style="width:300px;">
+											<h3>
+												${job_list.work_title }
+											</h3>
+											${job_list.member_id }
+											</br>
 											희망 가격 : ${job_list.work_price }원
-										<hr style="width:300px">
-								</li>
-							</c:forEach>
-							</ul>
-						</c:if>
+											<hr style="width:300px">
+									</li>
+								</c:forEach>
+								</ul>
+							</c:if>
+						</div>
 					</div>
 				</main>
 				<footer class="footer">
@@ -366,6 +378,11 @@
 		<script src="/resources/js/app.js"></script>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8862ea6580612c11c1adaf233a163b08&libraries=services"></script>
 		<script type="text/javascript">
+		
+		$("#sort").change(function(){
+			var sort_val = $(this).val();
+			getList(sort_val);
+		})
 		
 		/* 지도 생성 띄우기*/
 		var mapOptions = {
@@ -505,7 +522,8 @@
 								<hr>
 								<table width="300px" >
 									<tr>
-										<p><td align="left">희망 가격 : `+workvo.work_price+`</td>
+										<p><td align="left">희망 가격 : `+workvo.work_price+`원</td>
+										<p><td align="right">`+workvo.member_id+`</td>
 									</tr>
 									<tr height="10px"></tr>
 									<tr>
@@ -513,7 +531,7 @@
 											<input type="button" value="수락" style="width:150px; height:40px;">
 										</td>
 										<td>
-											<input type="button" value="목록" style="width:150px; height:40px;" onclick="getList()">
+											<input type="button" value="목록" style="width:150px; height:40px;" onclick="getList(1)">
 										</td>
 									</tr>
 								</table>
@@ -531,33 +549,117 @@
 			//el.id = "`+target.seq+`";
 			/* listEl.appendChild(el);  */
 			
+			$("#sort_div").hide();
 			
 		}
 		
-		function getList(){
-			let detailEl = document.getElementById("placesList");
-			/* 	const el = document.createElement("li"); */
-				const itemStr = `
-					<c:if test="${not empty list }">
-					<ul style="list-style-type: none;">
-					<c:forEach items="${list }" var="job_list" varStatus="status">
-						<li onclick="getData(${job_list.work_seq})" style="cursor: pointer;">
-								<hr style="width:300px;">
-								<h3>
-									${job_list.work_title }
-								</h3>
-									희망 가격 : ${job_list.work_price }원
-								<hr style="width:300px">
-						</li>
-					</c:forEach>
-					</ul>
-				</c:if>
-				`	
-				
-				/* el.innerHTML = itemStr;
-				el.className += "libox"; */
-				
-				detailEl.innerHTML = itemStr;
+		function getList(a){
+			$("#sort_div").show();
+			if(a==1){
+				let detailEl = document.getElementById("placesList");
+				/* 	const el = document.createElement("li"); */
+					const itemStr = `
+						<c:if test="${not empty list }">
+						<ul style="list-style-type: none;">
+						<c:forEach items="${list }" var="job_list" varStatus="status">
+							<li onclick="getData(${job_list.work_seq})" style="cursor: pointer;">
+									<hr style="width:300px;">
+									<h3>
+										${job_list.work_title }
+									</h3>
+										${job_list.member_id}
+										</br>
+										희망 가격 : ${job_list.work_price }원
+									<hr style="width:300px">
+							</li>
+						</c:forEach>
+						</ul>
+					</c:if>
+					`	
+					
+					/* el.innerHTML = itemStr;
+					el.className += "libox"; */
+					
+					detailEl.innerHTML = itemStr;
+			} else if(a==2){
+				let detailEl = document.getElementById("placesList");
+				/* 	const el = document.createElement("li"); */
+					const itemStr = `
+						<c:if test="${not empty list1 }">
+						<ul style="list-style-type: none;">
+						<c:forEach items="${list1 }" var="job_list" varStatus="status">
+							<li onclick="getData(${job_list.work_seq})" style="cursor: pointer;">
+									<hr style="width:300px;">
+									<h3>
+										${job_list.work_title }
+									</h3>
+										${job_list.member_id}
+										</br>
+										희망 가격 : ${job_list.work_price }원
+									<hr style="width:300px">
+							</li>
+						</c:forEach>
+						</ul>
+					</c:if>
+					`	
+					
+					/* el.innerHTML = itemStr;
+					el.className += "libox"; */
+					
+					detailEl.innerHTML = itemStr;
+			} else if(a==3){
+				let detailEl = document.getElementById("placesList");
+				/* 	const el = document.createElement("li"); */
+					const itemStr = `
+						<c:if test="${not empty list2 }">
+						<ul style="list-style-type: none;">
+						<c:forEach items="${list2 }" var="job_list" varStatus="status">
+							<li onclick="getData(${job_list.work_seq})" style="cursor: pointer;">
+									<hr style="width:300px;">
+									<h3>
+										${job_list.work_title }
+									</h3>
+										${job_list.member_id}
+										</br>
+										희망 가격 : ${job_list.work_price }원
+									<hr style="width:300px">
+							</li>
+						</c:forEach>
+						</ul>
+					</c:if>
+					`	
+					
+					/* el.innerHTML = itemStr;
+					el.className += "libox"; */
+					
+					detailEl.innerHTML = itemStr;
+			} else if(a==4){
+				let detailEl = document.getElementById("placesList");
+				/* 	const el = document.createElement("li"); */
+					const itemStr = `
+						<c:if test="${not empty list3 }">
+						<ul style="list-style-type: none;">
+						<c:forEach items="${list3 }" var="job_list" varStatus="status">
+							<li onclick="getData(${job_list.work_seq})" style="cursor: pointer;">
+									<hr style="width:300px;">
+									<h3>
+										${job_list.work_title }
+									</h3>
+										${job_list.member_id}
+										</br>
+										희망 가격 : ${job_list.work_price }원
+									<hr style="width:300px">
+							</li>
+						</c:forEach>
+						</ul>
+					</c:if>
+					`	
+					
+					/* el.innerHTML = itemStr;
+					el.className += "libox"; */
+					
+					detailEl.innerHTML = itemStr;
+			}
 		}
 		
 		
