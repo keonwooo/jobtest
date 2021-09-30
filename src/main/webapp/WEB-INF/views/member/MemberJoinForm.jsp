@@ -243,7 +243,7 @@
 						</li>
 	
 						<li class="sidebar-item active">
-							<a class="sidebar-link" href="/index.html">
+							<a class="sidebar-link" href="/">
 	              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
 	            </a>	
 						</li>
@@ -509,7 +509,7 @@
 						</div>
 						</br>
 
-						<div class="card">
+						<div class="card" style="width: 400px;">
 							<div class="card-body">
 								<div class="m-sm-4">
 									<div class="mb-3">
