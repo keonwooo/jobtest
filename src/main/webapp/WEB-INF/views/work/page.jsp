@@ -320,6 +320,7 @@
 								<table border="1">
 									<tr><th>타이틀</th><td><input type="text" name="work_title"  placeholder="title"></td></tr>
 									<tr><th>유형</th><td><input type="text" name="work_system"  placeholder="유형"></td></tr>
+									<tr><th>작성자</th><td><input type="text" name="member_id"  readonly="readonly" value="${sessionScope.LoginID }"></td></tr>
 									<tr><th>글내용</th><td><textarea name="work_board"  placeholder="내용"cols="20" rows="20"></textarea></td></tr>
 									<tr><th>가격</th><td><input type="text" name="work_price"  placeholder="가격" value="500"></td></tr>
 									<tr><th>주소</th><td><input type="text" id="sample5_address" placeholder="주소"><input type="button" onclick="DaumPostcode()" value="주소 검색"></td></tr>

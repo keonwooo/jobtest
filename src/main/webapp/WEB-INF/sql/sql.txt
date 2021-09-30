@@ -46,6 +46,7 @@ create table work(
     ,work_system            varchar2(50)    not null
     ,work_board			    varchar2(1000)  not null
     ,work_price			    number          not null
+    ,member_id				varchar2(50)	not null
     ,work_lat               number          null
     ,work_lng              number          null
     ,work_indate			date          default SYSDATE

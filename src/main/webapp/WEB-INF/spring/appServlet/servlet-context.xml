@@ -23,6 +23,18 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 로그인 인터셉트 정의 -->
+	<beans:bean id="loginInterceptor" class="com.project.jobtest.util.LoginInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/work/page"/>
+			<mapping path="/work/Write"/>
+			<!-- 위의 경로들은 다음의 인터셉터를 경유한다. -->
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan base-package="com.project.jobtest" />
 	
 	<websocket:handlers>

@@ -48,6 +48,23 @@ public class WorkService {
 		dao.deleteList(work_seq);
 	}
 
+	public ArrayList<workVO> selectAllList1() {
+		
+		ArrayList<workVO> list1 = dao.selectAllList1();
+		
+		return list1;
+	}
+
+	public ArrayList<workVO> selectAllList2() {
+		ArrayList<workVO> list2 = dao.selectAllList2();
+		return list2;
+	}
+
+	public ArrayList<workVO> selectAllList3() {
+		ArrayList<workVO> list3 = dao.selectAllList3();
+		return list3;
+	}
+
 	
 
 }
