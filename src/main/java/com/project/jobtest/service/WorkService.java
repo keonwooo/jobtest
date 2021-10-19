@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.project.jobtest.util.FileService;
 import com.project.jobtest.dao.WorkDAO;
 import com.project.jobtest.vo.workVO;
 
@@ -13,6 +15,8 @@ public class WorkService {
 	
 	@Autowired
 	private WorkDAO dao;
+	
+	private String uploadPath = "resources/upload";
 
 	
 //	C
@@ -20,6 +24,16 @@ public class WorkService {
 
 		dao.insertWorkList(work);
 	}
+	
+	public void insertWorkList2(workVO work, MultipartFile upload) {
+		
+		String savedfile = FileService.saveFile(upload, uploadPath);
+		work.setWork_savedFileName(savedfile);
+		work.setWork_originalFileName(upload.getOriginalFilename());
+		
+		dao.insertWorkList(work);
+	}
+	
 	
 //	R
 	public ArrayList<workVO> selectAllList() {
@@ -65,6 +79,5 @@ public class WorkService {
 		return list3;
 	}
 
-	
 
 }

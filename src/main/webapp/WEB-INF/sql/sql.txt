@@ -48,8 +48,10 @@ create table work(
     ,work_price			    number          not null
     ,member_id				varchar2(50)	not null
     ,work_lat               number          null
-    ,work_lng              number          null
-    ,work_indate			date          default SYSDATE
+    ,work_lng              	number          null
+    ,work_indate			date          	default SYSDATE
+    ,work_originalFileName	varchar2(1000)	not null
+    ,work_savedFileName		varchar2(1000)	not null
 );
 
 create table UserMaster(

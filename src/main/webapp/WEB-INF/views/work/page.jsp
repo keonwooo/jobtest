@@ -314,23 +314,27 @@
 	
 				<main class="content" style="justify-content: normal">
 					
-						<div id="map" style="width:50%; height: 100vh;"></div>
-						<div class="create_board" >
-							<form action="/work/Write" method="post" >
-								<table border="1">
-									<tr><th>타이틀</th><td><input type="text" name="work_title"  placeholder="title"></td></tr>
-									<tr><th>유형</th><td><input type="text" name="work_system"  placeholder="유형"></td></tr>
-									<tr><th>작성자</th><td><input type="text" name="member_id"  readonly="readonly" value="${sessionScope.LoginID }"></td></tr>
-									<tr><th>글내용</th><td><textarea name="work_board"  placeholder="내용"cols="20" rows="20"></textarea></td></tr>
-									<tr><th>가격</th><td><input type="text" name="work_price"  placeholder="가격" value="500"></td></tr>
-									<tr><th>주소</th><td><input type="text" id="sample5_address" placeholder="주소"><input type="button" onclick="DaumPostcode()" value="주소 검색"></td></tr>
-								</table>
+						<div id="map" style="width:100%; height: 100vh;"></div>
+						<div class="create_board">
+							<div >
+								<form action="/work/Write" method="post" enctype="multipart/form-data">
+									<table border="1" id="title_table">
+										<tr><th>타이틀</th><td><input type="text" name="work_title"  placeholder="title"></td></tr>
+										<tr><th>유형</th><td><input type="text" name="work_system"  placeholder="유형"></td></tr>
+										<tr><th>작성자</th><td><input type="text" name="member_id"  readonly="readonly" value="${sessionScope.LoginID }"></td></tr>
+										<tr><th>글내용</th><td><textarea name="work_board"  placeholder="내용"cols="20" rows="20"></textarea></td></tr>
+										<tr><th>가격</th><td><input type="text" name="work_price"  placeholder="가격" value="500"></td></tr>
+										<tr><th>주소</th><td><input type="text" id="sample5_address" placeholder="주소"><input type="button" onclick="DaumPostcode()" value="주소 검색"></td></tr>
+										<tr><th>첨부파일</th><td><div id="preview" style="width: 150px; height: 200px; border: 1px solid;"></div><input type="file" accept="image/*" name="upload" id="upload" onchange="previewImage(event);"/><br></td></tr>
+									</table>
 									<input type="hidden" id="work_lat" name="work_lat" value="lat">
 									<input type="hidden" id="work_lng" name="work_lng" value="lng">
-									<br>
-								<input type="submit" value="확인" >
-								<input type="button" onclick="location.href='/'" value="취소" >
-							</form>
+									<div style="text-align: center;">
+										<input type="submit" value="확인">
+										<input type="button" onclick="location.href='/'" value="취소" >
+									</div>
+								</form>
+							</div>
 						</div>
 					
 				</main>
@@ -472,6 +476,25 @@
             }
         }).open();
     }
+		
+			/* 첨부파일 */
+			function previewImage(event){
+				// FileReader 객체 사용
+				var reader = new FileReader();
+	
+				// 파일 읽기가 완료되었을때 실행
+				reader.onload = function(event){
+					var img = document.createElement("img");
+					img.setAttribute("src", event.target.result);
+					document.querySelector("div#preview").appendChild(img);
+				}
+	
+				// 파일을 읽는다
+				reader.readAsDataURL(event.target.files[0]);
+			}
+			
+			
+		
 		</script>
 	</body>
 

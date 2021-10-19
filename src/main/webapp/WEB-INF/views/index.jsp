@@ -495,15 +495,10 @@
 			const itemStr = `
 				<div class= "item_wrap">
 						<div class="short_img">
-							<a href="#">
-								<img src="http://placehold.it/110X112" />
+							<a href="c:/`+workvo.work_savedFileName+`">
+								<img src="/upload/`+workvo.work_savedFileName+`" />
 							</a>
-							<a href="#">
-								<img src="http://placehold.it/110X112" />
-							</a>
-							<a href="#">
-								<img src="http://placehold.it/110X112" />
-							</a>
+							
 						</div>	
 						<div class="item">
 								<hr style="width:300px">

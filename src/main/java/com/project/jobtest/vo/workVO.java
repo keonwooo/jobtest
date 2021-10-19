@@ -12,6 +12,8 @@ public class workVO {
 	private String work_board;
 	private String work_price;
 	private String member_id;
+	private String work_originalFileName;
+	private String work_savedFileName;
 	private Double work_lat;
 	private Double work_lng;
 	private Date work_indate;
