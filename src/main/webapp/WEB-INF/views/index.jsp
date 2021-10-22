@@ -495,8 +495,8 @@
 			const itemStr = `
 				<div class= "item_wrap">
 						<div class="short_img">
-							<a href="c:/`+workvo.work_savedFileName+`">
-								<img src="/upload/`+workvo.work_savedFileName+`" />
+							<a href="/resources/img/`+workvo.work_savedFileName+`">
+								<img src="/resources/img/`+workvo.work_savedFileName+`" />
 							</a>
 							
 						</div>	
@@ -666,7 +666,6 @@
 				success: function (workvo) {
 					const e = document.querySelector('.showDetail');
 					showdetail(workvo);
-			        
 				},
 				error: function (workvo) {
 					alert("존재하지 않는 글입니다.");

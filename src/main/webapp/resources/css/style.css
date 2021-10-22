@@ -120,6 +120,8 @@ a, link, visited{
 .short_img>a>img{
 	flex: 1;
 	margin: 0 2;
+	width: 150px;
+	height: 200px;
 }
 
 .create_board{
@@ -138,9 +140,9 @@ a, link, visited{
 	resize: none;
 }
 
-#preview>img{
-	width: 150px;
-	height: 200px;
+#preview > img{
+	width: 148px;
+	height: 198px;
 }
 
 

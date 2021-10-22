@@ -2,12 +2,14 @@ package com.project.jobtest.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.project.jobtest.util.FileService;
 import com.project.jobtest.dao.WorkDAO;
+import com.project.jobtest.util.FileService;
 import com.project.jobtest.vo.workVO;
 
 @Service
@@ -16,7 +18,7 @@ public class WorkService {
 	@Autowired
 	private WorkDAO dao;
 	
-	private String uploadPath = "resources/upload";
+	
 
 	
 //	C
@@ -25,12 +27,14 @@ public class WorkService {
 		dao.insertWorkList(work);
 	}
 	
-	public void insertWorkList2(workVO work, MultipartFile upload) {
+	public void insertWorkList2(workVO work, MultipartFile upload, HttpServletRequest request) {
+		
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/img");
 		
 		String savedfile = FileService.saveFile(upload, uploadPath);
 		work.setWork_savedFileName(savedfile);
 		work.setWork_originalFileName(upload.getOriginalFilename());
-		
+		System.out.println(uploadPath);
 		dao.insertWorkList(work);
 	}
 	
