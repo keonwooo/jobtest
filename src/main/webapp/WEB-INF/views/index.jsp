@@ -545,7 +545,10 @@
 			/* listEl.appendChild(el);  */
 			
 			$("#sort_div").hide();
-			
+				
+			const latlng = new naver.maps.LatLng(workvo.work_lat,workvo.work_lng);
+			map.setZoom(14, false);
+			map.panTo(latlng);
 		}
 		
 		function getList(a){
@@ -665,6 +668,7 @@
 /* 				dataType:"text",  //응답타입 */
 				success: function (workvo) {
 					const e = document.querySelector('.showDetail');
+					
 					showdetail(workvo);
 				},
 				error: function (workvo) {
@@ -687,8 +691,11 @@
 				
 				if(infoWindow.getMap()){
 					infoWindow.close();
+					
 				} else {
 					infoWindow.open(map, marker);
+					
+					
 				}
 			}
 		}
@@ -701,6 +708,7 @@
 			return function() {
 				var infoWindow = infoWindows[i];
 				infoWindow.close();
+				
 			}
 		}
 		
@@ -832,7 +840,7 @@
 		
 		        if (mapBounds.hasLatLng(position)) {
 		            showMarker(map, marker);
-		            showdetail();
+		        
 		          	console.log(marker)
 		        } else {
 		            hideMarker(map, marker);
